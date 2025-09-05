@@ -9,13 +9,26 @@
 using namespace std;
 
 // Definiciones
-typedef unsigned long long int lli;
+#define rp(i, a, b) for(int i = (a), TT = (b); i < TT; ++i)
 
 // Ordena en forma ascendente los datos con el método de Intercambio
-void swapsort(lli n);   // O(n²)
+void swapsort(vector<int>);   // O(n²)
 
 // Ordena en forma ascendentelos datos con el método de Burbuja
-void bubblesort(lli n);   // O(n²)
+void ordenaBurbuja(vector<int>);   // O(n²)
 
 // Ordena en forma ascendente los datos con el método de Merge
-void mergesort(lli n);     // O(…)
+void ordenaMerge(vector<int>);     // O(…)
+
+// Buscar con la busqueda secuencial un dato entero dentro del vector
+int secsearch(int n, vector<int>);    // O(n)
+
+// Buscar con la busqueda binaria un dato entero dentro del vector
+int busqBinaria(int n, vector<int>);  // O(log₂n)
+
+
+int main() {
+    return 0;
+}
+
+// Funciones
