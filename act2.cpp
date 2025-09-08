@@ -65,16 +65,56 @@ void ordenaIntercambio(vector<int> &v) {
     cout << comparaciones << ' ';
 }
 
-void ordenaBurbuja(vector<int> v) {
+void ordenaBurbuja(vector<int> &v) {
     int comparaciones = 0;
-    // ...
+    int sz = v.size();
+    bool huboSwap = true;
+
+    rp(pass, 0, sz - 1) {
+        huboSwap = false;
+        rp(j, 0, sz - 1 - pass) {
+            ++comparaciones;
+            if (v[j] > v[j + 1]) {
+                swap(v[j], v[j + 1]);
+                huboSwap = true;
+            }
+        }
+        if (!huboSwap) break;  // si no hubo intercambios, ya está ordenado
+    }
+
     cout << comparaciones << ' ';
 }
 
 void ordenaMerge(vector<int> v) {
     int comparaciones = 0;
-    // ...
-    cout << comparaciones << '\n';
+
+    // Función auxiliar recursiva
+    function<void(int,int)> mergeSort = [&](int l, int r) {
+        if (l >= r) return;
+        int m = (l + r) / 2;
+        mergeSort(l, m);
+        mergeSort(m + 1, r);
+
+        // Mezcla
+        int n1 = m - l + 1;
+        int n2 = r - m;
+        vector<int> L(n1), R(n2);
+        rp(i, 0, n1) L[i] = v[l + i];
+        rp(j, 0, n2) R[j] = v[m + 1 + j];
+
+        int i = 0, j = 0, k = l;
+        while (i < n1 && j < n2) {
+            ++comparaciones;               // cuenta cada comparación
+            if (L[i] <= R[j]) v[k++] = L[i++];
+            else              v[k++] = R[j++];
+        }
+        while (i < n1) v[k++] = L[i++];
+        while (j < n2) v[k++] = R[j++];
+    };
+
+    if (!v.empty()) mergeSort(0, (int)v.size() - 1);
+
+    cout << comparaciones << '\n';  // imprime y termina la primera línea
 }
 
 int busqSecuencial(int x, vector<int> v) {
