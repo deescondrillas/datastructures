@@ -20,7 +20,7 @@ void ordenaIntercambio(vector<int>&);    // O(n²)
 void ordenaBurbuja(vector<int>);        // O(n²)
 
 // Ordena en forma ascendente los datos con el método de Merge
-void ordenaMerge(vector<int>);          // O(…)
+void ordenaMerge(vector<int>);          // O(n log₂n)
 
 // Buscar con la busqueda secuencial un dato entero dentro del vector
 int busqSecuencial(int, vector<int>);   // O(n)
