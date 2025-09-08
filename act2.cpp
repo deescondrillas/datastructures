@@ -140,10 +140,10 @@ int busqBinaria(int x, vector<int> v) {
     int comparaciones = 0;
     int indice = - 1;
     int l = 0;
-    int r = v.size();
-    int mid = (l + r - 1)/2;
+    int r = v.size() - 1;
+    int mid = (l + r)/2;
 
-    while(l < r) {
+    while(l <= r) {
         ++comparaciones;
         if(x == v[mid]) {
             indice = mid;
@@ -151,11 +151,9 @@ int busqBinaria(int x, vector<int> v) {
         }
         if(x > v[mid]) l = mid + 1;
         else r = mid - 1;
-        mid = (l + r - 1)/2;
+        mid = (l + r)/2;
     }
-    /* OBSERVACIONES: para obtener los resultados de la tarea, se debe restar uno al
-     * calcular el valor medio,lo cual no hace ningún sentido. De hacer una búsqueda
-     * binaria más optimizada, se obtienen los resultados 2 3 3 3 vs 3 4 4 1 */
+
     cout << comparaciones << endl;
     return indice;
 }
