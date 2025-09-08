@@ -114,7 +114,6 @@ int busqBinaria(int x, vector<int> v) {
     /* OBSERVACIONES: para obtener los resultados de la tarea, se debe restar uno al
      * calcular el valor medio,lo cual no hace ningún sentido. De hacer una búsqueda
      * binaria más optimizada, se obtienen los resultados 2 3 3 3 vs 3 4 4 1 */
-
     cout << comparaciones << endl;
     return indice;
 }
