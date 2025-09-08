@@ -58,7 +58,7 @@ int main() {
 void ordenaIntercambio(vector<int> &v) {
     int comparaciones = 0;
     int sz = v.size();
-    rp(i, 0, sz) rp(j, i, sz) {
+    rp(i, 0, sz) rp(j, i + 1, sz) {
         ++comparaciones;
         if(v[i] > v[j]) swap(v[i], v[j]);
     }
