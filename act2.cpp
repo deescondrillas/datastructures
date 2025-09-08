@@ -17,10 +17,10 @@ using namespace std;
 void ordenaIntercambio(vector<int>&);    // O(n²)
 
 // Ordena en forma ascendentelos datos con el método de Burbuja
-void ordenaBurbuja(vector<int>);        // O(n²)
+void ordenaBurbuja(vector<int>&);        // O(n²)
 
 // Ordena en forma ascendente los datos con el método de Merge
-void ordenaMerge(vector<int>);          // O(n log₂n)
+void ordenaMerge(vector<int>&);          // O(n log₂n)
 
 // Buscar con la busqueda secuencial un dato entero dentro del vector
 int busqSecuencial(int, vector<int>);   // O(n)
@@ -35,14 +35,16 @@ int main() {
     int n; cin >> n;
     vector<int> arreglo(n);
     rp(i, 0, n) cin >> arreglo[i];
+    vector<int> arregl1 = arreglo;
+    vector<int> arregl2 = arreglo;
     // Input 2 – Entero positivo (q) y q queries
     int q; cin >> q;
     vector<int> queries(q);
     rp(i, 0, q) cin >> queries[i];
     // Output 1 – Cantidad de comparaciones por método de ordenamiento
     ordenaIntercambio(arreglo);
-    ordenaBurbuja(arreglo);
-    ordenaMerge(arreglo);
+    ordenaBurbuja(arregl1);
+    ordenaMerge(arregl2);
     // Proceso – Ordenar el arreglo para ejecutar las búsquedas
 
     // Output 2 – q respuestas a las queries y cantidad de comparaciones hechas
@@ -85,9 +87,9 @@ void ordenaBurbuja(vector<int> &v) {
     cout << comparaciones << ' ';
 }
 
-void ordenaMerge(vector<int> v) {
+void ordenaMerge(vector<int> &v) {
     int comparaciones = 0;
-
+/**/
     // Función auxiliar recursiva
     function<void(int,int)> mergeSort = [&](int l, int r) {
         if (l >= r) return;
@@ -113,7 +115,7 @@ void ordenaMerge(vector<int> v) {
     };
 
     if (!v.empty()) mergeSort(0, (int)v.size() - 1);
-
+/**/
     cout << comparaciones << '\n';  // imprime y termina la primera línea
 }
 
