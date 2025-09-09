@@ -5,7 +5,6 @@
 // A01739511 – Jorge Luis Zago Guevara
 
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -14,155 +13,130 @@ using namespace std;
 #define iostream_testcases ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);     // Gestiona todos los cin primero, y luego los cout
 
 // Ordena en forma ascendente los datos con el método de Intercambio
-void ordenaIntercambio(vector<int>&);    // O(n²)
+void ordenaIntercambio(int*);       // O(n²)
 
 // Ordena en forma ascendentelos datos con el método de Burbuja
-void ordenaBurbuja(vector<int>&);        // O(n²)
+void ordenaBurbuja(int*);           // O(n²)
 
 // Ordena en forma ascendente los datos con el método de Merge
-void ordenaMerge(vector<int>&);          // O(n log₂n)
+void ordenaMerge(int, int*);        // O(n log₂n)
+
 
 // Buscar con la busqueda secuencial un dato entero dentro del vector
-int busqSecuencial(int, vector<int>);   // O(n)
+int busqSecuencial(int, int*);      // O(n)
 
 // Buscar con la busqueda binaria un dato entero dentro del vector
-int busqBinaria(int, vector<int>);      // O(log₂n)
+int busqBinaria(int, int*);         // O(log₂n)
 
+// Variables globales – Comparaciones y tamaño del arreglo
+int sortI = 0;
+int sortB = 0;
+int sortM = 0;
+int busqS = 0;
+int busqB = 0;
+int n;
 
 int main() {
     iostream_testcases
     // Input 1 – Entero positivo (n) y arreglo de n elementos
-    int n; cin >> n;
-    vector<int> arreglo(n);
+    cin >> n;
+    int arreglo[n];
     rp(i, 0, n) cin >> arreglo[i];
-    vector<int> arregl1 = arreglo;
-    vector<int> arregl2 = arreglo;
     // Input 2 – Entero positivo (q) y q queries
     int q; cin >> q;
-    vector<int> queries(q);
+    int queries[q];
     rp(i, 0, q) cin >> queries[i];
-    // Output 1 – Cantidad de comparaciones por método de ordenamiento
-    ordenaIntercambio(arreglo);
-    ordenaBurbuja(arregl1);
-    ordenaMerge(arregl2);
+    // Proceso – Crear dos copias del arreglo para ordenarlas
+    int copy1[n], copy2[n];
+    rp(i, 0, n) copy1[i] = arreglo[i];
+    rp(i, 0, n) copy2[i] = arreglo[i];
     // Proceso – Ordenar el arreglo para ejecutar las búsquedas
-
+    ordenaIntercambio(copy1);
+    ordenaBurbuja(copy2);
+    ordenaMerge(n, arreglo);
+    // Output 1 – Cantidad de comparaciones por método de ordenamiento
+    cout << sortI << ' ' << sortB << ' ' << sortM << endl;
     // Output 2 – q respuestas a las queries y cantidad de comparaciones hechas
     rp(i, 0, q) {
-        busqSecuencial(queries[i], arreglo);
+        cout << busqSecuencial(queries[i], arreglo);
         busqBinaria(queries[i], arreglo);
+        cout << ' ' << busqS << ' ' << busqB << endl;
     }
-    // rp(i, 0, n) cout << arreglo[i] << ' '; cout << endl;
     return 0;
 }
 
 // Funciones
-void ordenaIntercambio(vector<int> &v) {
-    int comparaciones = 0;
-    int sz = v.size();
-    rp(i, 0, sz) rp(j, i + 1, sz) {
-        ++comparaciones;
-        if(v[i] > v[j]) swap(v[i], v[j]);
+void ordenaIntercambio(int *arr) {
+    rp(i, 0, n) rp(j, i + 1, n) {
+        if(arr[i] > arr[j]) swap(arr[i], arr[j]);
+        ++sortI;                                    // aumenta el contador con cada comparación
     }
-    cout << comparaciones << ' ';
 }
 
-void ordenaBurbuja(vector<int> &v) {
-    int comparaciones = 0;
-    int sz = v.size();
+void ordenaBurbuja(int *arr) {
     bool huboSwap = true;
 
-    rp(pass, 0, sz - 1) {
+    rp(i, 1, n) {
         huboSwap = false;
-        rp(j, 0, sz - 1 - pass) {
-            ++comparaciones;
-            if (v[j] > v[j + 1]) {
-                swap(v[j], v[j + 1]);
+        rp(j, 0, n - i) {
+            ++sortB;                                // aumenta el contador con cada comparación
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
                 huboSwap = true;
             }
         }
-        if (!huboSwap) break;  // si no hubo intercambios, ya está ordenado
+        if (!huboSwap) break;                       // si no hubo intercambios, ya está ordenado
     }
-
-    cout << comparaciones << ' ';
 }
 
-void ordenaMerge(vector<int> &v) {
-    int comparaciones = 0;
-/**/
-    // Función auxiliar recursiva
-    function<void(int,int)> mergeSort = [&](int l, int r) {
-        if (l >= r) return;
-        int m = (l + r) / 2;
-        mergeSort(l, m);
-        mergeSort(m + 1, r);
+void ordenaMerge(int sz, int *arr) {
+    if(sz == 1) return;
 
-        // Mezcla
-        int n1 = m - l + 1;
-        int n2 = r - m;
-        vector<int> L(n1), R(n2);
-        rp(i, 0, n1) L[i] = v[l + i];
-        rp(j, 0, n2) R[j] = v[m + 1 + j];
-
-        int i = 0, j = 0, k = l;
-        while (i < n1 && j < n2) {
-            ++comparaciones;               // cuenta cada comparación
-            if (L[i] <= R[j]) v[k++] = L[i++];
-            else              v[k++] = R[j++];
-        }
-        while (i < n1) v[k++] = L[i++];
-        while (j < n2) v[k++] = R[j++];
-    };
-
-    if (!v.empty()) mergeSort(0, (int)v.size() - 1);
-/**/
-    cout << comparaciones << '\n';  // imprime y termina la primera línea
-}
-
-int busqSecuencial(int x, vector<int> v) {
-    int comparaciones = 0;
-    int indice = - 1;
-
-    rp(i, 0, v.size()) {
-        ++comparaciones;
-        if(x == v[i]) {
-            indice = i;
-            break;
-        }
-    }
-
-    cout << indice << ' ';
-    cout << comparaciones << ' ';
-    return indice;
-}
-
-int busqBinaria(int x, vector<int> v) {
-    int comparaciones = 0;
-    int indice = - 1;
     int l = 0;
-    int r = v.size() - 1;
+    int r = 0;
+    int left = sz/2;
+    int right = sz - left;
+    int arrL[left], arrR[right];                    // se crean dos subarrays de la mitad de tamaño
+
+    rp(i, 0, sz) {                                  // se dividen los elementos en cada subarray
+        if(i < left) arrL[i] = arr[i];
+        else arrR[i - left] = arr[i];
+    }
+
+    ordenaMerge(left, arrL);                        // se ordena el primer subarray
+    ordenaMerge(right, arrR);                       // se ordena el segundo subarray
+
+    rp(i, 0, sz) {
+        if(l < left && r < right) {                 // si no se han usado ya todos los elementos de un subarray, los compara
+            ++sortM;                                // aumenta el contador con cada comparación
+            if(arrL[l] < arrR[r]) {                 // se toma el elemento más chico y se avanza al siguiente
+                arr[i] = arrL[l++];
+            }
+            else arr[i] = arrR[r++];
+        }
+        else if(l == left) arr[i] = arrR[r++];      // si se acaba el primer subarray, se completa con el segundo
+        else if(r == right) arr[i] = arrL[l++];     // si se acaba el segundo subarray, se completa con el primero
+    }
+}
+
+int busqSecuencial(int x, int *arr) {
+    busqS = 0;
+    rp(i, 0, n) if(x == arr[busqS++]) return i;     // aumenta el contador cada iteración, si encuentra x regresa su índice
+    return -1;                                      // si no encuentra x, regresa -1
+}
+
+int busqBinaria(int x, int *arr) {
+    busqB = 0;
+    int l = 0;
+    int r = n - 1;
     int mid = (l + r)/2;
 
     while(l <= r) {
-        ++comparaciones;
-        if(x == v[mid]) {
-            indice = mid;
-            break;
-        }
-        if(x > v[mid]) l = mid + 1;
+        ++busqB;                                    // aumenta el contador cada iteración
+        if(x == arr[mid]) return mid;               // al encontrar x, regresa su índice
+        if(x > arr[mid]) l = mid + 1;
         else r = mid - 1;
         mid = (l + r)/2;
     }
-
-    cout << comparaciones << endl;
-    return indice;
+    return -1;                                      // si no se encuentra x, se regresa -1
 }
-
-/*
-TC Input (borrar después)
-8
-10 4 8 12 20 15 54 18
-4
-20 54 100 12
-
-*/
