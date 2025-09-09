@@ -21,7 +21,6 @@ void ordenaBurbuja(int*);           // O(n²)
 // Ordena en forma ascendente los datos con el método de Merge
 void ordenaMerge(int, int*);        // O(n log₂n)
 
-
 // Buscar con la busqueda secuencial un dato entero dentro del vector
 int busqSecuencial(int, int*);      // O(n)
 
