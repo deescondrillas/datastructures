@@ -13,6 +13,11 @@ using namespace std;
 #define rp(i, a, b) for(int i = (a), TT = (b); i < TT; ++i)                         // Definición de un ciclo for rápido
 #define iostream_testcases ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);     // Gestiona todos los cin primero, y luego los cout
 
+//
+struct Log {
+
+};
+
 // Ordena en forma ascendente los datos con el método de Merge
 void ordenaMerge(int, int*);        // O(n log₂n)
 
