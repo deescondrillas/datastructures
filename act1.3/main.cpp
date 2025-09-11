@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -15,6 +16,15 @@ using namespace std;
 
 //
 struct Log {
+    vector<int> timestamp;      // 1. mes, día, hora, minuto, segundo
+    vector<int> ip;             // 2. primera, segunda, tercera, cuarta adress
+    string issue;
+    int port;
+
+
+    void read() {
+
+    }
 
 };
 
