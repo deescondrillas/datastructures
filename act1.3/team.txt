@@ -2,13 +2,24 @@ Act 1.3 – 14 de septiembre, 2025
 Distribución del trabajo en equipo
 
 A01739755 – Michelle Amanda Hernández Legaria {
-
+    Implementación de búsqueda binaria
 }
 
 A01739410 – Franco De Escondrillas Vázquez {
-
+    Implementación de la función mergesort
+    Sobrecarga de operadores para comparar logs
+    Función nprint() para imprimir en formato de dos dígitos
+    Optimización de memoria con vector<vector<logs>> para evitar copias
 }
 
 A01739511 – Jorge Luis Zago Guevara {
+    Implementación de métodos de lectura de logs
+    Implementación de métodos de escritura de logs
+    Implementación de función para leer el archivo bitácora.txt
+    Otros detalles para el parseo de datos
+}
 
+En clase (en equipo) {
+    Implementación de la estructura de datos
+    Definición de las variables para la estructura
 }
