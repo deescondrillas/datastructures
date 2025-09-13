@@ -164,6 +164,7 @@ int main() {
     // Input – 4 enteros (mes, dia, mes, dia)
     ii a, b; cin >> a.f >> a.s >> b.f >> b.s;
 
+    // Search – Búsqueda binaria
     ii x = binarysearch(a, b, logs[0]);
 
     // Output – consola
@@ -216,7 +217,7 @@ void mergesort(int lvl, int sz) {
 }
 
 ii binarysearch(ii l, ii r, vector<Log>& logs) {
-    return {l.f + r.f, l.s + r.s};
+    return {l.f + l.s, r.f + r.s};
 }
 
 void readBitacora(string filename) {
