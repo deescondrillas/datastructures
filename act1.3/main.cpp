@@ -178,8 +178,8 @@ int main() {
 }
 
 // Funciones
-string nprint(int n, bool x) {
-    string s = to_string(n);
+string nprint(int val, bool x) {
+    string s = to_string(val);
     if(x && s.size() < 2) s.insert(0, "0");
     return s;
 }
@@ -198,7 +198,7 @@ void mergesort(int lvl, int sz) {
 
     rp(i, 0, sz) {                                          // se dividen los elementos en cada subarray
         if(i < szL) logs[logL][i] = logs[lvl][i];
-        else logs[logR][i - szR] = logs[lvl][i];
+        else logs[logR][i - szL] = logs[lvl][i];
     }
 
     mergesort(logL, szL);                                   // se ordena el primer subarray
@@ -216,8 +216,31 @@ void mergesort(int lvl, int sz) {
     }
 }
 
-ii binarysearch(ii l, ii r, vector<Log>& logs) {
-    return {l.f + l.s, r.f + r.s};
+// Búsqueda binaria: encuentra intervalo de fechas (michelle)
+ii binarysearch(ii a, ii b, vector<Log>& arr) {
+    int sz = (int)arr.size();
+
+    // buscar inicio (primer índice >= fecha inicial)
+    int lo = 0, hi = sz;
+    while (lo < hi) {
+        int mid = (lo + hi) / 2;
+        ii d = arr[mid].dia();
+        if (d.f < a.f || (d.f == a.f && d.s < a.s)) lo = mid + 1;
+        else hi = mid;
+    }
+    int ini = lo;
+
+    // buscar final (primer índice > fecha final)
+    lo = 0; hi = sz;
+    while (lo < hi) {
+        int mid = (lo + hi) / 2;
+        ii d = arr[mid].dia();
+        if (d.f < b.f || (d.f == b.f && d.s <= b.s)) lo = mid + 1;
+        else hi = mid;
+    }
+    int endIdx = lo;   // <- renombrado para no chocar con ifstream fin
+
+    return {ini, endIdx};
 }
 
 void readBitacora(string filename) {
