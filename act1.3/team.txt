@@ -3,6 +3,7 @@ Distribución del trabajo en equipo
 
 A01739755 – Michelle Amanda Hernández Legaria {
     Implementación de búsqueda binaria
+    Revisión final y cambios menores del programa completo
 }
 
 A01739410 – Franco De Escondrillas Vázquez {
