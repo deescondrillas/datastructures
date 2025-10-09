@@ -10,21 +10,21 @@ using namespace std;
 
 // Estructura del nodo – componente principal de la lista
 template <class T>
-struct Nodo {
+struct Node {
     T data;
-    Nodo *next;
-    Nodo(T x, Nodo* h): data(x), next(h) {}
+    Node *next;
+    Node(T x, Node* h): data(x), next(h) {}
 };
 
 // Estructura de la lista ligada
 template <class T>
 struct List {
-    Nodo<T> *head = NULL;
+    Node<T> *head = NULL;
 
     // Inserta un elemento al final de la lista | O(n)
     void insert(T value) {
-        Nodo<T>* nuevoNodo = new Nodo<T>(value, NULL);
-        Nodo<T>* ptN = head;
+        Node<T>* nuevoNodo = new Node<T>(value, NULL);
+        Node<T>* ptN = head;
         if(!head) {
             head = nuevoNodo;
             return;
@@ -35,7 +35,7 @@ struct List {
 
     // Imprime los elementos de la lista | O(n)
     void print() {
-        Nodo<T>* ptN = head;
+        Node<T>* ptN = head;
         while(ptN) {
             cout << ptN->data << endl;
             ptN = ptN->next;
