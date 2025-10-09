@@ -16,12 +16,12 @@ struct Nodo {
     Nodo(T x, Nodo* h): data(x), next(h) {}
 };
 
-// Estructura de la lista ligada – contiene las funciones para insertar y eliminar
+// Estructura de la lista ligada
 template <class T>
 struct List {
     Nodo<T> *head = NULL;
 
-    // Inserta un elemento al final de la lista ligada | O(n)
+    // Inserta un elemento al final de la lista | O(n)
     void insert(T value) {
         Nodo<T>* nuevoNodo = new Nodo<T>(value, NULL);
         Nodo<T>* ptN = head;
