@@ -76,7 +76,7 @@ List<T> reverse(Node<T>* ptN) {
     return newList;
 }
 
-//revisa si dos listas son igualess | O(n)
+// Revisa si dos listas son igualess | O(n)
 template <class T>
 bool equals(List<T> *ptL1, List<T> *ptL2) {
     Node<T> * tmp1 = ptL1->head;
