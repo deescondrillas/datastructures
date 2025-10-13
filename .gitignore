@@ -1,0 +1,63 @@
+# === OS-specific ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === Build artifacts ===
+# Common C++ build outputs
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+*.a
+*.lib
+
+# Mac default executable name (from clang++)
+x
+
+# Windows default executable (from g++)
+a.exe
+
+# === IDEs and editors ===
+# VSCode
+.vscode/
+
+# CLion / JetBrains
+.idea/
+
+# Visual Studio
+*.vcxproj
+*.vcxproj.user
+*.sln
+*.suo
+*.ncb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*.vscode/
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserdata/
+
+# === Miscellaneous ===
+# Logs and temporary files
+*.log
+*.tmp
+
+# Backup files
+*~
+*.bak

@@ -2,7 +2,6 @@
 // Clase Node
 
 #pragma once
-
 using namespace std;
 
 template <class T>
