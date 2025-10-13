@@ -43,6 +43,7 @@ class List {
             }
             // El elemento es mayor a todos
             ptN = newNode;
+            // Error!!
             newNode->prev = ptN;
             tail = newNode;
         }
