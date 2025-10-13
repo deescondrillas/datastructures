@@ -43,8 +43,7 @@ class List {
             }
             // El elemento es mayor a todos
             ptN = newNode;
-            // Error!!
-            newNode->prev = ptN;
+            newNode->prev = tail;
             tail = newNode;
         }
         // Imprime los elementos de la lista | O(n)
