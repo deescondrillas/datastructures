@@ -11,9 +11,9 @@ using namespace std;
 // Estructura del nodo – componente principal de la lista
 template <class T>
 struct Node {
-    T data;
+    T log;
     Node *next;
-    Node(T x, Node* h): data(x), next(h) {}
+    Node(T x, Node* h): log(x), next(h) {}
 };
 
 // Estructura de la lista ligada

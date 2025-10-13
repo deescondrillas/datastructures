@@ -36,8 +36,8 @@ struct Log {
     // Variables de almacenamiento
     vector<int> timestamp = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
     vector<int> ip = {0, 0, 0, 0};               // 2. primera, segunda, tercera, cuarta address
-    int port = 0;                               // 3. puerto
-    string issue = "";                          // 4. descripción de error
+    int port = 0;                                // 3. puerto
+    string issue = "";                           // 4. descripción de error
 
     // Obtener mes y día de un log
     ii dia() {
