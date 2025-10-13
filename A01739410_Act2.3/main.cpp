@@ -15,12 +15,15 @@ ifstream fin("bitacora.txt");
 ofstream fout("sorted.txt");
 
 int main() {
+    int x = 0; // eliminar
     // Variables y estructuras de datos
     List<Log> logs;
     string line;
     Log reader;
     //Leer logs
     while(getline(fin, line)) {
+        ++x;    // eliminar
+        if(!(x % 10000)) cout << x << endl; // eliminar
         reader.read(line);
         logs.insert(reader);
     }

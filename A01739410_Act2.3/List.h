@@ -25,10 +25,9 @@ class List {
                 tail = newNode;
                 return;
             }
-            // Recorrer y comparar
-            while(ptN->next) {
-                ptN = ptN->next;
-                if(newNode < ptN) {
+            // Recorrer y comparar (dos o mas)
+            while(ptN) {
+                if(newNode->data < ptN->data) {
                     // Lazos previos
                     if(ptN->prev) {
                         ptN->prev->next = newNode;
@@ -40,9 +39,10 @@ class List {
                     ptN->prev = newNode;
                     return;
                 }
+                ptN = ptN->next;
             }
-            // El elemento es mayor
-            ptN->next = newNode;
+            // El elemento es mayor a todos
+            ptN = newNode;
             newNode->prev = ptN;
             tail = newNode;
         }

@@ -5,7 +5,6 @@
 
 #include <sstream>
 #include <utility>
-#include <vector>
 #include <string>
 
 using namespace std;
@@ -72,10 +71,14 @@ class Log {
         }
         // Sobrecarga para ordenar logs
         bool operator < (const Log& log) const {
-            if(ip < log.ip) return 1;
-            if(ip > log.ip) return 0;
-            if(timestamp < log.timestamp) return 1;
-            if(timestamp > log.timestamp) return 0;
+            for(int i = 0; i < 4; ++i) {
+                if(ip[i] < log.ip[i]) return 1;
+                if(ip[i] > log.ip[i]) return 0;
+            }
+            for(int i = 0; i < 5; ++i) {
+                if(timestamp < log.timestamp) return 1;
+                if(timestamp > log.timestamp) return 0;
+            }
             if(issue < log.issue) return 1;
             if(issue > log.issue) return 0;
             if(port < log.port) return 1;
@@ -84,8 +87,8 @@ class Log {
 
     private:
         // Variables de almacenamiento
-        vector<int> timestamp = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
-        vector<int> ip = {0, 0, 0, 0};               // 2. primera, segunda, tercera, cuarta address
-        int port = 0;                                // 3. puerto
-        string issue = "";                           // 4. descripción de error
+        int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
+        int ip[4] = {0, 0, 0, 0};               // 2. primera, segunda, tercera, cuarta address
+        int port = 0;                           // 3. puerto
+        string issue = "";                      // 4. descripción de error
 };
