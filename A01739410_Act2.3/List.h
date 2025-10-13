@@ -15,11 +15,11 @@ class List {
         List() {
 
         }
-        // Inserta elementos al inicio | O(1)
+        // Inserta elementos al final | O(1)
         void insert(T value) {
-            Node<T>* newNode = new Node<T>(value, NULL, head);
-            if(!tail) tail = newNode;
-            head = newNode;
+            Node<T>* newNode = new Node<T>(value, tail, NULL);
+            if(!head) head = newNode;
+            tail = newNode;
         }
         // Imprime los elementos de la lista | O(n)
         string print() {
