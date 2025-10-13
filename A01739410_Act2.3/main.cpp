@@ -27,6 +27,7 @@ int main() {
         reader.read(line);
         logs.insert(reader);
     }
+    // Output en sorted.txt
     fout << logs.print();
 
 

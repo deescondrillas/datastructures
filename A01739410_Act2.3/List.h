@@ -15,36 +15,11 @@ class List {
         List() {
 
         }
-        // Inserta elementos en orden | O(n)
+        // Inserta elementos al inicio | O(1)
         void insert(T value) {
-            Node<T>* newNode = new Node<T>(value, NULL, NULL);
-            Node<T>* ptN = head;
-            // Lista vacia
-            if(!head) {
-                head = newNode;
-                tail = newNode;
-                return;
-            }
-            // Recorrer y comparar (dos o mas)
-            while(ptN) {
-                if(newNode->data < ptN->data) {
-                    // Lazos previos
-                    if(ptN->prev) {
-                        ptN->prev->next = newNode;
-                        newNode->prev = ptN->prev;
-                    }
-                    else head = newNode;
-                    // Lazos siguientes
-                    newNode->next = ptN;
-                    ptN->prev = newNode;
-                    return;
-                }
-                ptN = ptN->next;
-            }
-            // El elemento es mayor a todos
-            ptN = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            Node<T>* newNode = new Node<T>(value, NULL, head);
+            if(!tail) tail = newNode;
+            head = newNode;
         }
         // Imprime los elementos de la lista | O(n)
         string print() {
