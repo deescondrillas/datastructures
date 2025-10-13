@@ -75,13 +75,13 @@ class Log {
                 if(ip[i] < log.ip[i]) return 1;
                 if(ip[i] > log.ip[i]) return 0;
             }
+            if(port < log.port) return 1;
+            if(port > log.port) return 0;
             for(int i = 0; i < 5; ++i) {
                 if(timestamp < log.timestamp) return 1;
                 if(timestamp > log.timestamp) return 0;
             }
             if(issue < log.issue) return 1;
-            if(issue > log.issue) return 0;
-            if(port < log.port) return 1;
             return 0;
         }
 
