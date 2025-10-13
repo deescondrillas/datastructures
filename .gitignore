@@ -61,3 +61,6 @@ a.exe
 # Backup files
 *~
 *.bak
+
+#Charly stuff
+stuff.txt
