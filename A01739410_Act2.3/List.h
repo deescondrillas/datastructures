@@ -51,7 +51,7 @@ class List {
             string out = "";
             Node<T>* ptN = head;
             while(ptN) {
-                ptN->data().write(out);
+                ptN->data.write(out);
                 ptN = ptN->next;
             }
             out.pop_back();

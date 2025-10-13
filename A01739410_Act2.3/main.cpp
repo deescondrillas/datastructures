@@ -22,7 +22,7 @@ int main() {
     //Leer logs
     while(getline(fin, line)) {
         reader.read(line);
-        logs.insert();
+        logs.insert(reader);
     }
     fout << logs.print();
 

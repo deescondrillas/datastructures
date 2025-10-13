@@ -10,28 +10,19 @@ class Node {
     public:
         // Constructor
         Node(T _val, Node* _prev, Node* _next) {
-            value = _val;
-            prevNode = _prev;
-            nextNode = _next;
-        }
-        // Getters
-        T data() {
-            return value;
-        }
-        Node* next() {
-            return nextNode;
-        }
-        Node* prev() {
-            return prevNode;
+            data = _val;
+            prev = _prev;
+            next = _next;
         }
         // Comparar nodos
-        bool operator < (const T& otherNode) const {
-            return value < otherNode.data();
+        bool operator < (const Node<T>& otherNode) const {
+            return data < otherNode.data;
         }
 
     private:
-        T value;
-        Node* nextNode;
-        Node* prevNode;
+        T data;
+        Node* next;
+        Node* prev;
 
+    template <class> friend class List;
 };
