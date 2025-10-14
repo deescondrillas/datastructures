@@ -2,7 +2,6 @@
 // Clase Node
 
 #pragma once
-using namespace std;
 
 template <class T>
 class Node {
@@ -13,6 +12,7 @@ class Node {
             prev = _prev;
             next = _next;
         }
+
         // Comparar nodos
         bool operator < (const Node<T>& otherNode) const {
             return data < otherNode.data;
@@ -20,8 +20,8 @@ class Node {
 
     private:
         T data;
-        Node* next;
         Node* prev;
+        Node* next;
 
     template <class> friend class List;
 };

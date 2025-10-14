@@ -4,15 +4,9 @@
 #pragma once
 
 #include <sstream>
-#include <utility>
 #include <string>
 
 using namespace std;
-
-typedef pair<int, int> ii;
-
-#define f first
-#define s second
 
 // Array para traducir meses de string a int
 string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep", "Oct", "Nov", "Dec"};
@@ -28,9 +22,8 @@ string nprint(int val, bool x) {
 class Log {
     public:
         // Constructor
-        Log() {
+        Log() {}
 
-        }
         // Guardar linea en log
         void read(string line) {
             stringstream lin(line);
@@ -61,6 +54,7 @@ class Log {
             getline(lin, mensaje, '\n');
             issue = mensaje;
         }
+
         // Imprimir log
         void write(string& doc) {
             doc += meses[timestamp[0]] + " " + nprint(timestamp[1], 1) + " ";
@@ -69,6 +63,7 @@ class Log {
             doc += ":" + nprint(port, 0) + " " + issue + '\n';
             return;
         }
+
         // Sobrecarga para ordenar logs
         bool operator < (const Log& log) const {
             for(int i = 0; i < 4; ++i) {
@@ -78,8 +73,8 @@ class Log {
             if(port < log.port) return 1;
             if(port > log.port) return 0;
             for(int i = 0; i < 5; ++i) {
-                if(timestamp < log.timestamp) return 1;
-                if(timestamp > log.timestamp) return 0;
+                if(timestamp[i] < log.timestamp[i]) return 1;
+                if(timestamp[i] > log.timestamp[i]) return 0;
             }
             if(issue < log.issue) return 1;
             return 0;

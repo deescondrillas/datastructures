@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Node.h"
 #include <iostream>
+#include "Node.h"
 
 using namespace std;
 
@@ -12,96 +12,83 @@ template <class T>
 class List {
     public:
         // Constructor
-        List() {
-
-        }
-        List(Node<T>* _head) {
+        List(Node<T>* _head = NULL, Node<T>* _tail = NULL) {
             head = _head;
+            tail = _tail;
         }
-        // Inserta elementos al final | O(1)
+
+        // Insercion de elementos al final | O(1)
         void insert(T value) {
             Node<T>* newNode = new Node<T>(value, tail, NULL);
             if(!head) head = newNode;
+            else tail->next = newNode;
             tail = newNode;
         }
-        // Ordenar ascendentemente | O(n log₂n)
-        void mergeSort() {
-            //condicion base
+
+        // Ordenamiento ascendentemente | O(n log₂n)
+        void mergesort() {
+            // Condicion base
             if (head == tail) return;
 
-            Node<T>* slowP = head;
-            Node<T>* fastP = head;
-
-            //Recorrido a la mitad O(n)
-            while(fastP -> next) {
-                fastP = fastP -> next;
-                slowP = slowP -> next;
-                if(fastP -> next) fastP = fastP -> next;
+            // Recorrido a la mitad
+            Node<T> *slowP(head), *fastP(head);
+            while(fastP->next) {
+                fastP = fastP->next;
+                if(fastP->next) {
+                    fastP = fastP->next;
+                    slowP = slowP->next;
+                }
             }
 
-            // Separar listas
-            slowP -> prev -> next = NULL;
-            slowP -> prev = NULL;
-            List<T> newList(slowP);
+            // Separacion de listas O(1)
+            List<T> newList(slowP->next, tail);
+            tail = slowP;
+            tail->next->prev = NULL;
+            tail->next = NULL;
 
             // Llamada recursiva
-            newList.mergeSort();
-            mergeSort();
+            newList.mergesort();
+            mergesort();
 
-            // Unir listas
-            Node<T> *ptL1(head), *ptL2(slowP);
+            // Union de listas
+            Node<T> *ptL1(head), *ptL2(newList.head);
+            Node<T> **ptMin;
             head = tail = NULL;
             while(ptL1 && ptL2) {
-                // Insertar primer elemento
-                if(ptL1->data < ptL2->data) {
-                    // Lista vacia
-                    if(!head) {
-                        head = ptL1;
-                        tail = ptL1;
-                    }
-                    // Lista con elementos
-                    else {
-                        tail->next = ptL1;
-                        ptL1->prev = tail;
-                        tail = tail->next;
-                    }
-                        ptL1 = ptL1->next;
+                // Insercion del primer elemento
+                if(ptL1->data < ptL2->data) ptMin = &ptL1;
+                else ptMin = &ptL2;
+                // Lista vacia
+                if(!head) {
+                    head = *ptMin;
+                    tail = *ptMin;
                 }
+                // Lista con elementos
                 else {
-                     // Lista vacia
-                    if(!head) {
-                        head = ptL2;
-                        tail = ptL2;
-                    }
-                    // Lista con elementos
-                    else {
-                        tail->next = ptL2;
-                        ptL1->prev = tail;
-
-                        tail = tail -> next;
-                    }
-                        ptL2 = ptL2->next;
+                    tail->next = *ptMin;
+                    (*ptMin)->prev = tail;
+                    tail = tail->next;
                 }
+                *ptMin = (*ptMin)->next;
             }
-            // Insertar lista sobrante
+            // Union con lista sobrante
             if(ptL1) {
                 tail->next = ptL1;
                 ptL1->prev = tail;
-                tail = tail->next;
             } else {
                 tail->next = ptL2;
                 ptL2->prev = tail;
-                tail = tail->next;
             }
+            // Recorrer tail al final
+            while(tail->next) tail = tail->next;
         }
 
         // Busqueda lineal | O(n)
         string search(string IP1, string IP2) {
-            int ip1[4], ip2[4];
-            return 'a';
+            return IP1;
         }
 
-        // Imprime los elementos de la lista | O(n)
+        // Imprecion de lista | O(n)
         string print() {
             string out = "";
             Node<T>* ptN = head;
