@@ -2,16 +2,16 @@
 
 // A01739410 – Franco De Escondrillas Vazquez
 // A01739522 – Sergio Sebastian Cortez Yepez
-// A01739190 - Carlos Arturo Ferat Torres
+// A01739190 – Carlos Arturo Ferat Torres
 
 #include <fstream>      // Para leer y escribir archivos
 #include "List.h"
 #include "Log.h"
 
 // Definiciones
-ifstream fin("bitacora.txt");
-ofstream fout("sortedDarta.txt");
-int* entrada(int);
+ifstream fin("bitacora.txt");       // Leer desde archivo
+ofstream fout("sortedDarta.txt");   // Escribir en archivo
+int* entrada(int);                  // Cambiar la entrada del usuario de string a Log
 
 int main() {
     // Variables y estructuras de datos
@@ -19,25 +19,28 @@ int main() {
     string line;
     Log reader;
 
-    // Input desde bitacora.txt
+    // Input desde bitacora.txt | O(n)
     while(getline(fin, line)) {
         reader.read(line);
         logs.insert(reader);
     }
 
-    // Mergesort O(n log₂n)
+    // Mergesort                | O(n log₂n)
     logs.mergesort();
 
-    // Output en sorted.txt
+    // Output en sortedData.txt | O(n)
     fout << logs.print();
 
-    // Busqueda secuencial
+    // Input de consola         | O(1)
     Log inicio(entrada(0));
     Log final(entrada(1));
+
+    // Busqueda secuencial      | O(n)
     cout << logs.search(inicio, final);
     return 0;
 }
 
+// Convertir entrada a Log      | O(1)
 int* entrada(int x) {
     string input, address("");
     int pts(0);
