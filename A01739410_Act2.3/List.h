@@ -94,11 +94,11 @@ class List {
             while(ptEnd->data < right && ptEnd->next) ptEnd = ptEnd->next;
             if(right < ptEnd->data) ptEnd = ptEnd->prev;
             // Imprimir ascendente
-            while(ptEnd != ptStart) {
+            while(ptEnd->next != ptStart) {
                 ptEnd->data.write(out);
                 ptEnd = ptEnd->prev;
+                if(ptEnd == NULL) break;
             }
-            ptStart->data.write(out);
             return out;
         }
 
