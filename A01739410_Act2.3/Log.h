@@ -22,7 +22,9 @@ string nprint(int val, bool x) {
 class Log {
     public:
         // Constructor
-        Log() {}
+        Log(int *_ip = NULL) {
+            if(_ip) for(int i = 0; i < 4; ++i) ip[i] = _ip[i];
+        }
 
         // Guardar linea en log
         void read(string line) {

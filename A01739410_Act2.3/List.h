@@ -84,8 +84,22 @@ class List {
         }
 
         // Busqueda lineal | O(n)
-        string search(string IP1, string IP2) {
-            return IP1;
+        string search(T left, T right) {
+            string out = "";
+            // Recorrer izquierda
+            Node<T> *ptStart(head), *ptEnd(tail);
+            while(ptStart->data < left && ptStart->next) ptStart = ptStart->next;
+            // Recorrer derecha
+            ptEnd = ptStart;
+            while(ptEnd->data < right && ptEnd->next) ptEnd = ptEnd->next;
+            if(right < ptEnd->data) ptEnd = ptEnd->prev;
+            // Imprimir ascendente
+            while(ptEnd != ptStart) {
+                ptEnd->data.write(out);
+                ptEnd = ptEnd->prev;
+            }
+            ptStart->data.write(out);
+            return out;
         }
 
         // Imprecion de lista | O(n)

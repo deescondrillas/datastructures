@@ -11,6 +11,7 @@
 // Definiciones
 ifstream fin("bitacora.txt");
 ofstream fout("sorted.txt");
+int* entrada(int);
 
 int main() {
     // Variables y estructuras de datos
@@ -30,7 +31,24 @@ int main() {
     // Output en sorted.txt
     fout << logs.print();
 
-    // Busqueda secuencial (por implementar)
-    cout << "done" << endl;
+    // Busqueda secuencial
+    Log inicio(entrada(0));
+    Log final(entrada(1));
+    cout << logs.search(inicio, final);
     return 0;
+}
+
+int* entrada(int x) {
+    string input, address("");
+    int pts(0);
+    cin >> input;
+    int* ips = new int[4];
+    for(int i = 0; i < 4; ++i) {
+        while(input[pts] != '.' && pts < input.size()) address += input[pts++];
+        ips[i] = stoi(address);
+        address = "";
+        ++pts;
+    }
+    ips[3] += x;
+    return ips;
 }
