@@ -10,7 +10,7 @@
 
 // Definiciones
 ifstream fin("bitacora.txt");
-ofstream fout("sorted.txt");
+ofstream fout("sortedDarta.txt");
 int* entrada(int);
 
 int main() {
