@@ -2,13 +2,21 @@ Act 2.3 – Actividad Integral estructura de datos lineales
 15 de octubre, 2025
 
 A01739410 – Franco De Escondrillas Vazquez {
-    ...
+    Definicion de Logs y almacenamiento
+     • Log.h
 }
 
 A01739522 – Sergio Sebastian Cortez Yepez {
-    ...
+    Ordenamiento de la lista ligada
+     • mergesort()
 }
 
 A01739190 – Carlos Arturo Ferat Torres {
-    ...
+    Estructura y metodos de la lista ligada
+     • List.h
+}
+
+En conjunto {
+    Programa principal
+     • main.cpp
 }
