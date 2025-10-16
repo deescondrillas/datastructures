@@ -102,7 +102,7 @@ class List {
             return out;
         }
 
-        // Imprecion de lista | O(n)
+        // Impresion de lista | O(n)
         string print() {
             string out = "";
             Node<T>* ptN = head;

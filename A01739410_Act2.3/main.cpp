@@ -10,7 +10,7 @@
 
 // Definiciones
 ifstream fin("bitacora.txt");       // Leer desde archivo
-ofstream fout("sortedDarta.txt");   // Escribir en archivo
+ofstream fout("sortedData.txt");   // Escribir en archivo
 int* entrada(int);                  // Cambiar la entrada del usuario de string a Log
 
 int main() {
