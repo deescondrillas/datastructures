@@ -82,6 +82,22 @@ class Log {
             return 0;
         }
 
+        // Sobrecarga para ordenar logs
+        bool operator < (const Log& log) const {
+            for(int i = 0; i < 4; ++i) {
+                if(ip[i] < log.ip[i]) return 1;
+                if(ip[i] > log.ip[i]) return 0;
+            }
+            if(port < log.port) return 1;
+            if(port > log.port) return 0;
+            for(int i = 0; i < 5; ++i) {
+                if(timestamp[i] < log.timestamp[i]) return 1;
+                if(timestamp[i] > log.timestamp[i]) return 0;
+            }
+            if(issue < log.issue) return 1;
+            return 0;
+        }
+
     private:
         // Variables de almacenamiento
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
