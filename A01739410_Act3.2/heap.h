@@ -65,22 +65,6 @@ class Heap {
             for(int i = 0; i < sz; ++i) cout << heap[i] << ' ';
             cout << endl;
         }
-        // Ordena los elementos por prioridad       | O(n log₂n)
-        void heapsort() {
-            int temp = sz;
-            T sorted[temp];
-            for(int i = 0; i < temp; ++i) {sorted[i] = top(); pop();}
-            for(int i = 0; i < temp; ++i) push(sorted[i]);
-        }
-        // Imprime cada nodo con sus hijos          | O(n)
-        void nodes() {
-            for(int i = 0; i < sz; ++i) {
-                if(2 * i >= sz) break;
-                if(2 * i + 1 < sz) cout << heap[i] << " l(" << heap[2 * i + 1] << ')';
-                if(2 * i + 2 < sz) cout << " r(" << heap[2 * i + 2] << ")";
-                cout << endl;
-            }
-        }
 
     private:
         T heap[1024];

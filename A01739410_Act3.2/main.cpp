@@ -38,7 +38,6 @@ int main() {
                 cout << heap.size() << endl;
                 break;
             default:
-                heap.heapsort();
                 break;
         }
     }
