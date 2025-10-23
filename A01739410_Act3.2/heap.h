@@ -1,3 +1,6 @@
+// Act 3.2 – 26 de octubre, 2025
+// Clase heap
+
 #pragma once
 #include <iostream>
 
@@ -11,6 +14,7 @@ class Heap {
             return a > b; // max heap
             return a < b; // min heap
         }
+
         // Swapea nodos hasta formar un heap        | O(log₂n)
         void heapify(int p = 0) {
             int childL(2 * p + 1), childR(2 * p + 2), mxe(heap[p]), mxp(p);
@@ -37,29 +41,35 @@ class Heap {
                 heapify(mxp);
             }
         }
+
         // Inserta un elemento y heapifea           | O(log₂n)
         void push(T val) {
             heap[sz++] = val;
             heapify();
         }
+
         // Elimina un elemento y heapifea           | O(log₂n)
         void pop() {
             heap[0] = heap[--sz];
             heapify();
         }
+
         // Regresa el valor con mayor prioridad     | O(1)
         T top() {
             return heap[0];
         }
+
         // Regresa true si el heap está vacío
         // o false si no lo está                    | O(1)
         bool empty() {
             return !sz ? true : false;
         }
+
         // Regresa el tamaño del heap               | O(1)
         int size() {
             return sz;
         }
+
         // Imprime todo el heap                     | O(n)
         void print() {
             for(int i = 0; i < sz; ++i) cout << heap[i] << ' ';

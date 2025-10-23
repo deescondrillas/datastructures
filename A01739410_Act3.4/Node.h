@@ -11,6 +11,7 @@ class Node {
             data = _val;
             left = _left;
             right = _right;
+            height = 0;
         }
 
         // Comparar nodos
@@ -18,10 +19,16 @@ class Node {
             return data > otherNode.data;
         }
 
+        // Comparar nodos
+        bool operator < (const Node<T>& otherNode) const {
+            return data < otherNode.data;
+        }
+
     private:
         T data;
+        int height;
         Node* left;
         Node* right;
 
-    template <class> friend class List;
+    template <class> friend class AVL;
 };
