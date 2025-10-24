@@ -43,16 +43,61 @@ class AVL {
 
     // Genera las rotaciones pertinentes                    | O(log₂n)*
     Node<T>* avl(Node<T>* p) {
-        int dif(0);
-        if(p->left) dif = p->left->height;
-        if(p->right) dif -= p->right->height;
-        if(abs(dif) < 2) return p;
+        if(abs(delta(p)) < 2) return p;
         // Representar principales con x, y, z
-        Node<T> *x, *y, *z, *a, *b, *c, *d;
-
-        // Esta función recibe un nodo (el padre), y regresa
-        // el nodo padre después de hacer la rotación
-        return p;
+        Node<T> *x, *y, *z, *a(NULL), *b(NULL), *c(NULL), *d(NULL);
+        // Variantes 1 y 2
+        if(delta(p) > 0) {
+            x = p;
+            // Caso 1
+            if(delta(p->right) > 0) {
+                y = x->right;
+                z = y->right;
+                if(x->left) a = x->left;
+                if(y->left) b = y->left;
+                if(z->left) c = z->left;
+                if(z->right) d = z->right;
+            }
+            // Caso 2
+            else {
+                z = x->right;
+                y = z->left;
+                if(x->left) a = x->left;
+                if(y->left) b = y->left;
+                if(y->right) c = y->right;
+                if(z->right) d = z->right;
+            }
+        }
+        // Variantes 3 y 4
+        else {
+            z = p;
+            // Caso 3
+            if(delta(z->left) < 0) {
+                y = z->left;
+                x = y->left;
+                if(x->left) a = x->left;
+                if(x->right) b = x->right;
+                if(y->right) c = y->right;
+                if(z->right) d = z->right;
+            }
+            // Caso 4
+            else {
+                x = z->left;
+                y = x->right;
+                if(x->left) a = x->left;
+                if(y->left) b = y->left;
+                if(y->right) c = y->right;
+                if(z->right) d = z->right;
+            }
+        }
+        // Generar rotación
+        y->left = x;
+        y->right = z;
+        x->left = a;
+        x->right = b;
+        z->left = c;
+        z->right = d;
+        return y;
     }
 
     // Imprime k datos de mayor a menor                     | O(k log₂n)
@@ -65,6 +110,14 @@ class AVL {
         --k;
         if(p->left) k = inordenC(k, p->left);
         return k;
+    }
+
+    // Obtiene la diferencia de alturas
+    int delta(Node<T>* p) {
+        int dif(0);
+        if(p->left) dif = p->left->height;
+        if(p->right) dif -= p->right->height;
+        return dif;
     }
 
     private:
