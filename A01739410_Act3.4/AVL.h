@@ -11,9 +11,14 @@ using namespace std;
 template <class T>
 class AVL {
     public:
+    // Regresa la raiz para insertar desde ahí              | O(1)
+    Node<T>* r() {
+        return root;
+    }
+
     // Insertar elemento en el AVL                          | O(log₂n)
     void insert(T value, Node<T>* &p = nullptr) {
-        Node<T>* newNode = new Node<T>(value, p);
+        Node<T>* newNode = new Node<T>(value);
         Node<T>* child = newNode;
         p ? p : p = root;
         if(!root) {

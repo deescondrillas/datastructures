@@ -7,9 +7,8 @@ template <class T>
 class Node {
     public:
         // Constructor
-        Node(T _val, Node* _father = nullptr) {
+        Node(T _val) {
             data = _val;
-            father = _father;
         }
 
         // Comparar nodos
@@ -27,7 +26,6 @@ class Node {
         int height = 0;
         Node* left = nullptr;
         Node* right = nullptr;
-        Node* father = nullptr;
 
     template <class> friend class AVL;
 };
