@@ -10,12 +10,11 @@
 
 // Definiciones
 ifstream fin("bitacora.txt");       // Leer desde archivo
-ofstream fout("sortedData.txt");   // Escribir en archivo
 int* entrada(int);                  // Cambiar la entrada del usuario de string a Log
 
 int main() {
     // Variables y estructuras de datos
-    List<Log> logs;
+    AVL<Log> logs;
     string line;
     Log reader;
 
@@ -24,6 +23,9 @@ int main() {
         reader.read(line);
         logs.insert(reader);
     }
+
+    // Output a consola         | O(k log₂n)
+    logs.inordenC(5);
 }
 
 // Convertir entrada a Log      | O(1)

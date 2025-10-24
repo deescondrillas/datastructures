@@ -13,56 +13,52 @@ class AVL {
     public:
     // Insertar elemento en el AVL                          | O(log₂n)
     void insert(T value, Node<T>* p = NULL) {
+        Node<T>* newNode = new Node<T>(value, p);
+        Node<T>* child = newNode;
         p ? p : p = root;
-        Node<T>* newNode = new Node<T>(value, NULL, NULL);
         if(!root) {
             root = newNode;
             return;
         }
         // Insertar a la izquierda
         if(value < p->data) {
-            --p->equi; // no siempre
-            if(p->left) insert(value, p->left);
+            if(p->left) {
+                insert(value, p->left);
+                child = p->left;
+            }
             else p->left = newNode;
+            if(p->height < child->height + 1) p->height += 1;
+            avl(p);
         }
         // Insertar a la derecha
         if(value > p->data) {
-            ++p->equi; // no siempre
-            if(p->right) insert(value, p->right);
+            if(p->right) {
+                insert(value, p->right);
+                child = p->right;
+            }
             else p->right = newNode;
-        }
-        // Checar equilibrio
-        // ...
-    }
-
-    void avl(T value, Node<T>* p = NULL) {
-        p ? p : p = root;
-        Node<T>* newNode = new Node<T>(value, NULL, NULL);
-        if(!root) {
-            root = newNode;
-            return;
-        }
-        if(value < p->data) {
-            if(p->left) insert(value, p->left);
-            else p->left = newNode;
-        }
-        if(value > p->data) {
-            if(p->right) insert(value, p->right);
-            else p->right = newNode;
+            if(p->height < child->height + 1) p->height += 1;
+            avl(p);
         }
     }
 
-    // Imprime datos de menor a mayor
-    int inordenC(Node<T>* p = NULL, int k = 0) {
+    void avl(Node<T>* p) {
+        if(p->height < 2) return;
+
+    }
+
+    // Imprime k datos de mayor a menor                     | O(k log₂n)
+    int inordenC(int k = 0, Node<T>* p = NULL) {
         if(!k) return 0;
         p ? p : p = root;
-        if(p->right) k = inordenC(p->right, k);
+        if(p->right) k = inordenC(k, p->right);
         if(!k) return 0;
-        cout << p->data << endl;
-        if(p->left) k = inordenC(p->left, --k);
+        p->data.print();
+        --k;
+        if(p->left) k = inordenC(k, p->left);
         return k;
     }
 
     private:
         Node<T>* root = NULL;
-}
+};

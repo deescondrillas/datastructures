@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -58,11 +59,13 @@ class Log {
         }
 
         // Imprimir log
-        void write(string& doc) {
+        void print() {
+            string doc;
             doc += meses[timestamp[0]] + " " + nprint(timestamp[1], 1) + " ";
             doc += nprint(timestamp[2], 1) + ":" + nprint(timestamp[3], 1) + ":" + nprint(timestamp[4], 1) + " ";
             doc += nprint(ip[0], 0) + "." + nprint(ip[1], 0) + "." + nprint(ip[2], 0) + "." + nprint(ip[3], 0);
             doc += ":" + nprint(port, 0) + " " + issue + '\n';
+            cout << doc;
             return;
         }
 
