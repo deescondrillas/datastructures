@@ -41,7 +41,7 @@ class AVL {
             avl(p);
         }
     }
-
+    // Genera las rotaciones pertinentes                    | O(log₂n)*
     void avl(Node<T>* p) {
         if(p->height < 2) return;
 
