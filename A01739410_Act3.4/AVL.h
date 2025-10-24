@@ -43,9 +43,10 @@ class AVL {
 
     // Genera las rotaciones pertinentes                    | O(log₂n)*
     Node<T>* avl(Node<T>* p) {
-        if(p->height < 2) return;
+        if(p->height < 2) return p;
         // Esta función recibe un nodo (el padre), y regresa
         // el nodo padre después de hacer la rotación
+        return p;
     }
 
     // Imprime k datos de mayor a menor                     | O(k log₂n)
