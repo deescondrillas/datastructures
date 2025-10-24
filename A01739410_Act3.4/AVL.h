@@ -27,8 +27,6 @@ class AVL {
                 child = p->left;
             }
             else p->left = newNode;
-            if(p->height < child->height + 1) p->height += 1;
-            avl(p);
         }
         // Insertar a la derecha
         if(value > p->data) {
@@ -37,14 +35,17 @@ class AVL {
                 child = p->right;
             }
             else p->right = newNode;
-            if(p->height < child->height + 1) p->height += 1;
-            avl(p);
         }
+        // Revisar y realizar rotaciones
+        if(p->height < child->height + 1) p->height += 1;
+        p = avl(p);
     }
-    // Genera las rotaciones pertinentes                    | O(log₂n)*
-    void avl(Node<T>* p) {
-        if(p->height < 2) return;
 
+    // Genera las rotaciones pertinentes                    | O(log₂n)*
+    Node<T>* avl(Node<T>* p) {
+        if(p->height < 2) return;
+        // Esta función recibe un nodo (el padre), y regresa
+        // el nodo padre después de hacer la rotación
     }
 
     // Imprime k datos de mayor a menor                     | O(k log₂n)
