@@ -43,7 +43,7 @@ class AVL {
         }
         // Revisar y realizar rotaciones
         if(p->height < child->height + 1) p->height += 1;
-        p = avl(p);
+        // p = avl(p);
     }
 
     // Genera las rotaciones pertinentes                    | O(log₂n)*
@@ -125,6 +125,6 @@ class AVL {
         return dif;
     }
 
-    private:
+    // private:
         Node<T>* root = nullptr;
 };
