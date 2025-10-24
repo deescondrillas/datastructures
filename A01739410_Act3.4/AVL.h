@@ -12,7 +12,7 @@ template <class T>
 class AVL {
     public:
     // Insertar elemento en el AVL                          | O(log₂n)
-    void insert(T value, Node<T>* p = nullptr) {
+    void insert(T value, Node<T>* &p = nullptr) {
         Node<T>* newNode = new Node<T>(value, p);
         Node<T>* child = newNode;
         p ? p : p = root;
@@ -47,10 +47,11 @@ class AVL {
         if(p->left) dif = p->left->height;
         if(p->right) dif -= p->right->height;
         if(abs(dif) < 2) return p;
-        // Esta función recibe un nodo (el padre), y regresa
-        // el nodo padre después de hacer la rotación
+        // Representar principales con x, y, z
         Node<T> *x, *y, *z, *a, *b, *c, *d;
 
+        // Esta función recibe un nodo (el padre), y regresa
+        // el nodo padre después de hacer la rotación
         return p;
     }
 
