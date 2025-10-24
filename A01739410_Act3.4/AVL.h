@@ -12,7 +12,7 @@ template <class T>
 class AVL {
     public:
     // Insertar elemento en el AVL                          | O(log₂n)
-    void insert(T value, Node<T>* p = NULL) {
+    void insert(T value, Node<T>* p = nullptr) {
         Node<T>* newNode = new Node<T>(value, p);
         Node<T>* child = newNode;
         p ? p : p = root;
@@ -43,14 +43,19 @@ class AVL {
 
     // Genera las rotaciones pertinentes                    | O(log₂n)*
     Node<T>* avl(Node<T>* p) {
-        if(p->height < 2) return p;
+        int dif(0);
+        if(p->left) dif = p->left->height;
+        if(p->right) dif -= p->right->height;
+        if(abs(dif) < 2) return p;
         // Esta función recibe un nodo (el padre), y regresa
         // el nodo padre después de hacer la rotación
+        Node<T> *x, *y, *z, *a, *b, *c, *d;
+
         return p;
     }
 
     // Imprime k datos de mayor a menor                     | O(k log₂n)
-    int inordenC(int k = 0, Node<T>* p = NULL) {
+    int inordenC(int k = 0, Node<T>* p = nullptr) {
         if(!k) return k;
         p ? p : p = root;
         if(p->right) k = inordenC(k, p->right);
@@ -62,5 +67,5 @@ class AVL {
     }
 
     private:
-        Node<T>* root = NULL;
+        Node<T>* root = nullptr;
 };
