@@ -42,8 +42,8 @@ class AVL {
             else p->right = newNode;
         }
         // Revisar y realizar rotaciones
+        p = avl(p);
         if(p->height < child->height + 1) p->height += 1;
-        // p = avl(p);
     }
 
     // Genera las rotaciones pertinentes                    | O(log₂n)*
@@ -55,7 +55,7 @@ class AVL {
         if(delta(p) > 0) {
             x = p;
             // Caso 1
-            if(delta(p->right) > 0) {
+            if(delta(x->right) > 0) {
                 y = x->right;
                 z = y->right;
                 if(x->left) a = x->left;
@@ -120,8 +120,8 @@ class AVL {
     // Obtiene la diferencia de alturas
     int delta(Node<T>* p) {
         int dif(0);
-        if(p->left) dif = p->left->height;
-        if(p->right) dif -= p->right->height;
+        if(p->right) dif = p->right->height;
+        if(p->left) dif -= p->left->height;
         return dif;
     }
 
