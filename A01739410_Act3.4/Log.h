@@ -1,4 +1,4 @@
-// Act 3.4 – 26 de octubre, 2025
+// Act 3.4 – 28 de octubre, 2025
 // Clase Log
 
 #pragma once

@@ -1,4 +1,4 @@
-// Act 3.4 – 26 de octubre, 2025
+// Act 3.4 – 28 de octubre, 2025
 // Clase AVL
 
 #pragma once
@@ -51,10 +51,10 @@ class AVL {
 
     // Imprime k datos de mayor a menor                     | O(k log₂n)
     int inordenC(int k = 0, Node<T>* p = NULL) {
-        if(!k) return 0;
+        if(!k) return k;
         p ? p : p = root;
         if(p->right) k = inordenC(k, p->right);
-        if(!k) return 0;
+        if(!k) return k;
         p->data.print();
         --k;
         if(p->left) k = inordenC(k, p->left);
