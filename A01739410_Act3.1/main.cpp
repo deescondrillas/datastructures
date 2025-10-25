@@ -1,4 +1,4 @@
-// Act 3.3 – 25 de octubre, 2025
+// Act 3.1 – 25 de octubre, 2025
 
 // A01739410 – Franco De Escondrillas Vazquez
 // A01739522 – Sergio Sebastian Cortez Yepez
@@ -17,11 +17,11 @@ class Node {
             data = _data;
             left = right = nullptr;
         }
-        // Comparar nodos
+        // Comparar nodos                       | O(1)
         bool operator > (const Node<T>& otherNode) const {
             return data > otherNode.data;
         }
-        // Comparar nodos
+        // Comparar nodos                       | O(1)
         bool operator < (const Node<T>& otherNode) const {
             return data < otherNode.data;
         }
@@ -39,7 +39,7 @@ class BST {
         // Constructor
         BST (){root = nullptr;}
 
-        // Insertar datos
+        // Insertar datos                       | promedio de O(log₂n)
         Node<T>* insert(T value, Node<T>* node = NULL){
             // Si el arbol esta vacio
             if (!root){
@@ -61,56 +61,57 @@ class BST {
             return root;
         }
 
-        // Eliminar datos
+        // Eliminar datos                           | O(n)
         void elimina(T value){
             elimina(value, root);
         }
 
-        // Recorridos
+        // Recorridos                               | O(n)
         void traversal(int t){
             switch (t){
                 case 1:
-                    preOrden(root); // PreOrder
+                    preOrden(root); // PreOrden     | O(n)
                     cout << endl;
                     break;
                 case 2:
-                    inOrden(root);  // InOrder
+                    inOrden(root);  // InOrden      | O(n)
                     cout << endl;
                     break;
                 case 3:
-                    postOrden(root);    //PostOrder
+                    postOrden(root);    //PostOrden | O(n)
                     cout << endl;
                     break;
                 case 4:
-                    levelOrder(root);   //Level by level
+                    levelOrder(root);   //Por nivel | O(n)
                     cout << endl;
                     break;
             }
         }
 
-        // Altura
+        // Altura                           | O(n)
         int height(){
             return height(root);
         }
 
-        // Ancestros
+        // Ancestros                        | O(n)
         void ancestors(T value){
             vector<T> an;
             ancestors(value, root, an);
+            //Imrpime de la raiz hacia abajo
             for (int i = an.size(); i > 0; i--)
                 cout << an[i - 1] << " ";
             cout << endl;
         }
 
-        // Nivel
-        int whatlevelamI(T value){
+        // Nivel                            | O(n)
+        int whatlevelamI(T value){          
             return whatlevelamI(value, root, 0);
         }
 
     private:
         Node<T>* root = NULL;
 
-        // RID
+        // Imprime recorrido en preOrden        | O(n)
         void preOrden(Node<T>* node){
             if(node){
                 cout << node -> data << " ";
@@ -119,7 +120,7 @@ class BST {
             }
         }
 
-        // IRD
+        // Imprime recorrido en inOrden         | O(n)
         void inOrden(Node<T>* node){
             if(node){
                 inOrden(node -> left);
@@ -128,7 +129,7 @@ class BST {
             }
         }
 
-        // IDR
+        // Imprim recoriddo en postOrden        | O(n)
         void postOrden(Node<T>* node){
             if (node){
                 postOrden(node -> left);
@@ -137,7 +138,7 @@ class BST {
             }
         }
 
-        // Por Nivel
+        // Imprime recorrido por Nivel          | O(n)
         void levelOrder(Node<T>* node){
             queue<Node<T>*> a;
             a.push(root);
@@ -151,7 +152,7 @@ class BST {
             }
         }
 
-        // Elimina
+        // Elimina                              | promedio de O(log₂n)
         Node<T>* elimina(T value, Node<T>* node){
             if(!node) return NULL;
 
@@ -185,15 +186,15 @@ class BST {
             return node;
         }
 
-        // Altura
+        // Altura                               | O(n)
         int height(Node<T>* node) {
             if (!node) return 0;
             int leftH = height(node->left);     // Altura izquierda
             int rightH = height(node->right);   // Altura derecha
-            return 1 + max(leftH, rightH);      // Recorrido recursivo
+            return 1 + max(leftH, rightH);      // Retorna rama mayor
         }
 
-        // Ancestros
+        // Ancestros                            | O(n)
         bool ancestors(T value, Node<T>* node, vector<T>& an){
             if (!node) return false;
             if (node -> data == value) return true; //Encontro el valor
@@ -207,9 +208,9 @@ class BST {
             return false;   //No encontro el valor
         }
 
-        // Nivel de un dato
+        // Nivel de un dato                     | O(n)
         int whatlevelamI(T value, Node<T>* node, int level){
-            if (!node) return -1;   // No lo encontro
+            if (!node) return -1;
             if (node-> data == value) return level; // Se encuentra al nivel
 
             int left = whatlevelamI(value, node -> left, level + 1);
