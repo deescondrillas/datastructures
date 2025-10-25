@@ -20,7 +20,7 @@ int main() {
     // Input desde bitacora.txt | O(n)
     while(getline(fin, line)) {
         reader.read(line);
-        logs.insert(reader, logs.root);
+        logs.insert(reader);
     }
 
     // Output a consola         | O(k log₂n)

@@ -17,91 +17,95 @@ class AVL {
     }
 
     // Insertar elemento en el AVL                          | O(log₂n)
-    void insert(T value, Node<T>* &p = nullptr) {
+    void insert(T value, Node<T>** p = nullptr) {
         Node<T>* newNode = new Node<T>(value);
         Node<T>* child = newNode;
-        p ? p : p = root;
+        p ? p : p = &root;
         if(!root) {
             root = newNode;
             return;
         }
         // Insertar a la izquierda
-        if(value < p->data) {
-            if(p->left) {
-                insert(value, p->left);
-                child = p->left;
+        if(value < (*p)->data) {
+            if((*p)->left) {
+                insert(value, &(*p)->left);
+                child = (*p)->left;
             }
-            else p->left = newNode;
+            else (*p)->left = newNode;
         }
         // Insertar a la derecha
-        if(value > p->data) {
-            if(p->right) {
-                insert(value, p->right);
-                child = p->right;
+        if(value > (*p)->data) {
+            if((*p)->right) {
+                insert(value, &(*p)->right);
+                child = (*p)->right;
             }
-            else p->right = newNode;
+            else (*p)->right = newNode;
         }
         // Revisar y realizar rotaciones
-        p = avl(p);
-        if(p->height < child->height + 1) p->height += 1;
+        (*p) = avl(*p);
+        if((*p)->height < child->height + 1) (*p)->height += 1;
     }
 
     // Genera las rotaciones pertinentes                    | O(log₂n)*
     Node<T>* avl(Node<T>* p) {
         if(abs(delta(p)) < 2) return p;
         // Representar principales con x, y, z
-        Node<T> *x, *y, *z, *a(NULL), *b(NULL), *c(NULL), *d(NULL);
-        // Variantes 1 y 2
-        if(delta(p) > 0) {
-            x = p;
-            // Caso 1
-            if(delta(x->right) > 0) {
+        Node<T> *x, *y, *z;
+        // Identificar variante del problema
+        int ha(0), hb(0), hc(0), hd(0), var(0);
+        if(delta(p) > 0) delta(p->right) > 0 ? var = 1 : var = 2;
+        if(delta(p) < 0) delta(p->left) < 0 ? var = 3 : var = 4;
+        // Asignar caso
+        switch(var) {
+            case 1:
+                x = p;
                 y = x->right;
                 z = y->right;
-                if(x->left) a = x->left;
-                if(y->left) b = y->left;
-                if(z->left) c = z->left;
-                if(z->right) d = z->right;
-            }
-            // Caso 2
-            else {
+                break;
+            case 2:
+                x = p;
                 z = x->right;
                 y = z->left;
-                if(x->left) a = x->left;
-                if(y->left) b = y->left;
-                if(y->right) c = y->right;
-                if(z->right) d = z->right;
-            }
-        }
-        // Variantes 3 y 4
-        else {
-            z = p;
-            // Caso 3
-            if(delta(z->left) < 0) {
+                break;
+            case 3:
+                z = p;
                 y = z->left;
                 x = y->left;
-                if(x->left) a = x->left;
-                if(x->right) b = x->right;
-                if(y->right) c = y->right;
-                if(z->right) d = z->right;
-            }
-            // Caso 4
-            else {
+                break;
+            case 4:
+                z = p;
                 x = z->left;
                 y = x->right;
-                if(x->left) a = x->left;
-                if(y->left) b = y->left;
-                if(y->right) c = y->right;
-                if(z->right) d = z->right;
-            }
+                break;
+            default:
+                cout << "ERROR" << endl;
+                break;
         }
-        // Generar rotación
+        // Asignar hijos de x, y, z
+        Node<T> *a(NULL), *b(NULL), *c(NULL), *d(NULL);
+        x->left ? a = x->left : NULL;
+        y->left ? b = y->left : NULL;
+        y->right ? c = y->right : NULL;
+        z->right ? d = z->right : NULL;
+        // Modificacion de casos 1 y 3
+        if(var == 1) z->left ? c = z->left : c = NULL;
+        if(var == 3) x->right ? b = x->right : b = NULL;
+        // Generar rotacion
         y->left = x;
         y->right = z;
         x->left = a;
         x->right = b;
         z->left = c;
         z->right = d;
+        // Actualizar alturas
+        a ? ha = a->height : --ha;
+        b ? hb = b->height : --hb;
+        c ? hc = c->height : --hc;
+        d ? hd = d->height : --hd;
+        x->height = max(ha, hb) + 1;
+        z->height = max(hc, hd) + 1;
+        y->height = max(x->height, z->height) + 1;
+        // Regresar nuevo padre
         return y;
     }
 
@@ -127,4 +131,5 @@ class AVL {
 
     // private:
         Node<T>* root = nullptr;
+        int v = 0;
 };
