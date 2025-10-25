@@ -7,6 +7,7 @@
 #include "Node.h"
 
 // borrar despues
+#include <vector>
 #include <string>
 #include <queue>
 
@@ -147,14 +148,18 @@ class AVL {
         char o;
         int spaces = pow2(level);
         line ?  o = '_' :  o = ' ';
-        for(int i = 1; i < spaces; ++i) i > spaces/2 + 1 ? cout << o : cout << ' ';
+        if(x[0] == ' ') for(int i = 1; i < spaces; ++i) cout << ' ';
+        else for(int i = 1; i < spaces; ++i) i > spaces/2 + 1 ? cout << o : cout << ' ';
         x.size() < 2 ? cout << '0' + x : cout << x;
-        for(int i = 1; i < spaces; ++i) i < spaces/2 - 1 ? cout << o : cout << ' ';
+        if(x[1] == ' ') for(int i = 1; i < spaces; ++i) cout << ' ';
+        else for(int i = 1; i < spaces; ++i) i < spaces/2 - 1 ? cout << o : cout << ' ';
     }
 
     // Imprimir arbol                           | O(?)
     void tree() {
+        string start = "";
         int num(0), level(deep()), h(level);
+        queue<string> nodes, outs, conections;
         queue<Node<T>*> level0, level1;
         queue<Node<T>*>  *zero(&level0), *one(&level1), *temp;
         zero->push(root);
@@ -163,24 +168,46 @@ class AVL {
             // Imprimir nivel
             while(zero->size()) {
                 Node<T>* ptn = zero->front(); zero->pop();
-                ptn ? print(level, to_string(++num % 100)) : print(level);
+                // ptn ? print(level, to_string(++num % 100)) : print(level);
                 ptn ? one->push(ptn->left) : one->push(NULL);
                 ptn ? one->push(ptn->right) : one->push(NULL);
+                ptn ? nodes.push(to_string(++num % 100)) : nodes.push("  ");
+                if(ptn) {
+                    ptn->left ? conections.push(" /") : conections.push("  ");
+                    ptn->right ? conections.push("\\ ") : conections.push("  ");
+                    ptn->left ? start = "/" : start = " ";
+                    ptn->right ? start += "\\" : start += " ";
+                } else {
+                    conections.push("  ");
+                    conections.push("  ");
+                    start = "  ";
+                }
+                outs.push(start);
             }
             temp = &(*zero);
             zero = &(*one);
             one = &(*temp);
-            // Imprimir coneccion
-            cout << endl;
-            if(level == 1) break;
-            for(int i = 0; i < pow2(h - level); ++i) print(level, "/\\", 1);
-            cout << endl;
-            --level;
-            for(int i = 0; i < pow2(h - level) / 2; ++i) {
-                print(level, " /");
-                print(level, "\\ ");
+            // Imprimir nivel
+            while(nodes.size()) {
+                print(level, nodes.front());
+                nodes.pop();
             }
             cout << endl;
+            // Imprimir coneccion
+            if(level == 1) break;
+            while(outs.size()) {
+                print(level, outs.front(), 1);
+                outs.pop();
+            }
+            cout << endl;
+            // for(int i = 0; i < pow2(h - level); ++i) print(level, "/\\", 1);
+            --level;
+            while(conections.size()) {
+                print(level, conections.front());
+                conections.pop();
+            }
+            cout << endl;
+            // for(int i = 0; i < pow2(h - level) / 2; ++i) {print(level, " /"); print(level, "\\ ");}
         }
     }
 
