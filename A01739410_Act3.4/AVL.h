@@ -6,28 +6,26 @@
 #include <iostream>
 #include "Node.h"
 
+// borrar despues
+#include <string>
+#include <queue>
+
 using namespace std;
 
 template <class T>
 class AVL {
     public:
-    // Obtiene la diferencia de alturas                     | O(1)
-    int delta(Node<T>* p) {
-        int dif(0);
-        if(p->right) dif = p->right->height + 1;
-        if(p->left) dif -= p->left->height + 1;
-        return dif;
-    }
-
-    // Actualiza la altura de un nodo                       | O(1)
-    void update(Node<T>* p) {
+    // Actualiza la altura de un nodo           | O(1)
+    // Regresa la Δh entre sus hijos
+    int update(Node<T>* p) {
         int hl, hr;
         p->left ? hl = p->left->height : hl = -1;
         p->right ? hr = p->right->height : hr = -1;
         p->height = max(hl, hr) + 1;
+        return hr - hl;
     }
 
-    // Imprime k datos de mayor a menor                     | O(k log₂n)
+    // Imprime k datos de mayor a menor         | O(k log₂n)
     int inordenC(int k = 0, Node<T>* p = nullptr) {
         if(!k) return k;
         p ? p : p = root;
@@ -39,7 +37,7 @@ class AVL {
         return k;
     }
 
-    // Insertar elemento en el AVL                          | O(log₂n)
+    // Insertar elemento en el AVL              | O(log₂n)
     void insert(T value, Node<T>** p = nullptr) {
         Node<T>* newNode = new Node<T>(value);
         Node<T>** child = &newNode;
@@ -69,15 +67,15 @@ class AVL {
         update(*p);
     }
 
-    // Genera las rotaciones pertinentes                    | O(1)
+    // Genera las rotaciones pertinentes        | O(1)
     Node<T>* avl(Node<T>* p) {
-        if(abs(delta(p)) < 2) return p;
+        if(abs(update(p)) < 2) return p;
         // Representar principales con x, y, z
         Node<T> *x, *y, *z;
         // Identificar variante del problema
         int var;
-        if(delta(p) > 0) delta(p->right) > 0 ? var = 1 : var = 2;
-        if(delta(p) < 0) delta(p->left) < 0 ? var = 3 : var = 4;
+        if(update(p) > 0) update(p->right) > 0 ? var = 1 : var = 2;
+        if(update(p) < 0) update(p->left) < 0 ? var = 3 : var = 4;
         // Asignar caso
         switch(var) {
             case 1:
@@ -128,25 +126,64 @@ class AVL {
         return y;
     }
 
-    // Para visualizar el arbol, se imprime padre e hijo cada elemento
-    void nodes(int parent = 1, Node<T>* p = nullptr) {
-        int l, r;
+// A partir de aqui nada es necesario para la entrega. Solo pinta el arbol
+
+    // Obtener altura del arbol                 | O(n)
+    int deep(int level = 1, Node<T>* p = nullptr) {
         p ? p : p = root;
-        cout << parent << ' ';
-        if(p->left) {
-            cout << "l(" << ++node << ") ";
-            l = node;
+        int mx = level;
+        if(p->left) mx = max(mx, deep(level + 1, p->left));
+        if(p->right) mx = max(mx, deep(level + 1, p->right));
+        return mx;
+    }
+
+    // Obtener potencia de dos                  | O(k)
+    int pow2(int k = 0) {
+        return k ? pow2(k - 1) << 1 : 1;
+    }
+
+    // Imprimir cada subrenglon del arbol       | O(n)
+    void print(int level = 0, string x = "--", bool line = false) {
+        char o;
+        int spaces = pow2(level);
+        line ?  o = '_' :  o = ' ';
+        for(int i = 1; i < spaces; ++i) i > spaces/2 + 1 ? cout << o : cout << ' ';
+        x.size() < 2 ? cout << '0' + x : cout << x;
+        for(int i = 1; i < spaces; ++i) i < spaces/2 - 1 ? cout << o : cout << ' ';
+    }
+
+    // Imprimir arbol                           | O(?)
+    void tree() {
+        int num(0), level(deep()), h(level);
+        queue<Node<T>*> level0, level1;
+        queue<Node<T>*>  *zero(&level0), *one(&level1), *temp;
+        zero->push(root);
+        // Repetir cada nivel
+        while(level) {
+            // Imprimir nivel
+            while(zero->size()) {
+                Node<T>* ptn = zero->front(); zero->pop();
+                ptn ? print(level, to_string(++num % 100)) : print(level);
+                ptn ? one->push(ptn->left) : one->push(NULL);
+                ptn ? one->push(ptn->right) : one->push(NULL);
+            }
+            temp = &(*zero);
+            zero = &(*one);
+            one = &(*temp);
+            // Imprimir coneccion
+            cout << endl;
+            if(level == 1) break;
+            for(int i = 0; i < pow2(h - level); ++i) print(level, "/\\", 1);
+            cout << endl;
+            --level;
+            for(int i = 0; i < pow2(h - level) / 2; ++i) {
+                print(level, " /");
+                print(level, "\\ ");
+            }
+            cout << endl;
         }
-        if(p->right) {
-            cout << "r(" << ++node << ") ";
-            r = node;
-        }
-        cout << endl;
-        if(p->left) nodes(l, p->left);
-        if(p->right) nodes(r, p->right);
     }
 
     private:
         Node<T>* root = nullptr;
-        int node = 1;
 };
