@@ -99,7 +99,6 @@ class BST {
             ancestors(value, root, an);
             for (int i = an.size(); i > 0; i--)
                 cout << an[i - 1] << " ";
-
             cout << endl;
         }
 
