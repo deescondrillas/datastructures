@@ -25,4 +25,5 @@ int main() {
 
     // Output a consola         | O(k log₂n)
     logs.inordenC(5);
+    logs.nodes();
 }

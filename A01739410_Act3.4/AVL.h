@@ -11,15 +11,38 @@ using namespace std;
 template <class T>
 class AVL {
     public:
-    // Regresa la raiz para insertar desde ahí              | O(1)
-    Node<T>* r() {
-        return root;
+    // Obtiene la diferencia de alturas                     | O(1)
+    int delta(Node<T>* p) {
+        int dif(0);
+        if(p->right) dif = p->right->height + 1;
+        if(p->left) dif -= p->left->height + 1;
+        return dif;
+    }
+
+    // Actualiza la altura de un nodo                       | O(1)
+    void update(Node<T>* p) {
+        int hl, hr;
+        p->left ? hl = p->left->height : hl = -1;
+        p->right ? hr = p->right->height : hr = -1;
+        p->height = max(hl, hr) + 1;
+    }
+
+    // Imprime k datos de mayor a menor                     | O(k log₂n)
+    int inordenC(int k = 0, Node<T>* p = nullptr) {
+        if(!k) return k;
+        p ? p : p = root;
+        if(p->right) k = inordenC(k, p->right);
+        if(!k) return k;
+        p->data.print();
+        --k;
+        if(p->left) k = inordenC(k, p->left);
+        return k;
     }
 
     // Insertar elemento en el AVL                          | O(log₂n)
     void insert(T value, Node<T>** p = nullptr) {
         Node<T>* newNode = new Node<T>(value);
-        Node<T>* child = newNode;
+        Node<T>** child = &newNode;
         p ? p : p = &root;
         if(!root) {
             root = newNode;
@@ -29,7 +52,7 @@ class AVL {
         if(value < (*p)->data) {
             if((*p)->left) {
                 insert(value, &(*p)->left);
-                child = (*p)->left;
+                child = &(*p)->left;
             }
             else (*p)->left = newNode;
         }
@@ -37,22 +60,22 @@ class AVL {
         if(value > (*p)->data) {
             if((*p)->right) {
                 insert(value, &(*p)->right);
-                child = (*p)->right;
+                child = &(*p)->right;
             }
             else (*p)->right = newNode;
         }
         // Revisar y realizar rotaciones
-        (*p) = avl(*p);
-        if((*p)->height < child->height + 1) (*p)->height += 1;
+        *p = avl(*p);
+        update(*p);
     }
 
-    // Genera las rotaciones pertinentes                    | O(log₂n)*
+    // Genera las rotaciones pertinentes                    | O(1)
     Node<T>* avl(Node<T>* p) {
         if(abs(delta(p)) < 2) return p;
         // Representar principales con x, y, z
         Node<T> *x, *y, *z;
         // Identificar variante del problema
-        int ha(0), hb(0), hc(0), hd(0), var(0);
+        int var;
         if(delta(p) > 0) delta(p->right) > 0 ? var = 1 : var = 2;
         if(delta(p) < 0) delta(p->left) < 0 ? var = 3 : var = 4;
         // Asignar caso
@@ -82,14 +105,14 @@ class AVL {
                 break;
         }
         // Asignar hijos de x, y, z
-        Node<T> *a(NULL), *b(NULL), *c(NULL), *d(NULL);
-        x->left ? a = x->left : NULL;
-        y->left ? b = y->left : NULL;
-        y->right ? c = y->right : NULL;
-        z->right ? d = z->right : NULL;
+        Node<T> *a, *b, *c, *d;
+        x->left ? a = x->left : a = nullptr;
+        y->left ? b = y->left : b = nullptr;
+        y->right ? c = y->right : c = nullptr;
+        z->right ? d = z->right : d = nullptr;
         // Modificacion de casos 1 y 3
-        if(var == 1) z->left ? c = z->left : c = NULL;
-        if(var == 3) x->right ? b = x->right : b = NULL;
+        if(var == 1) z->left ? c = z->left : c = nullptr;
+        if(var == 3) x->right ? b = x->right : b = nullptr;
         // Generar rotacion
         y->left = x;
         y->right = z;
@@ -98,38 +121,32 @@ class AVL {
         z->left = c;
         z->right = d;
         // Actualizar alturas
-        a ? ha = a->height : --ha;
-        b ? hb = b->height : --hb;
-        c ? hc = c->height : --hc;
-        d ? hd = d->height : --hd;
-        x->height = max(ha, hb) + 1;
-        z->height = max(hc, hd) + 1;
-        y->height = max(x->height, z->height) + 1;
+        update(x);
+        update(z);
+        update(y);
         // Regresar nuevo padre
         return y;
     }
 
-    // Imprime k datos de mayor a menor                     | O(k log₂n)
-    int inordenC(int k = 0, Node<T>* p = nullptr) {
-        if(!k) return k;
+    // Para visualizar el arbol, se imprime padre e hijo cada elemento
+    void nodes(int parent = 1, Node<T>* p = nullptr) {
+        int l, r;
         p ? p : p = root;
-        if(p->right) k = inordenC(k, p->right);
-        if(!k) return k;
-        p->data.print();
-        --k;
-        if(p->left) k = inordenC(k, p->left);
-        return k;
+        cout << parent << ' ';
+        if(p->left) {
+            cout << "l(" << ++node << ") ";
+            l = node;
+        }
+        if(p->right) {
+            cout << "r(" << ++node << ") ";
+            r = node;
+        }
+        cout << endl;
+        if(p->left) nodes(l, p->left);
+        if(p->right) nodes(r, p->right);
     }
 
-    // Obtiene la diferencia de alturas
-    int delta(Node<T>* p) {
-        int dif(0);
-        if(p->right) dif = p->right->height;
-        if(p->left) dif -= p->left->height;
-        return dif;
-    }
-
-    // private:
+    private:
         Node<T>* root = nullptr;
-        int v = 0;
+        int node = 1;
 };
