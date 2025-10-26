@@ -61,7 +61,7 @@ class BST {
             return root;
         }
 
-        // Eliminar datos                           | O(n)
+        // Eliminar datos                           | promedio de O(log₂n)
         void elimina(T value){
             elimina(value, root);
         }
@@ -93,7 +93,7 @@ class BST {
             return height(root);
         }
 
-        // Ancestros                        | O(n)
+        // Ancestros                        | promedio de O(log₂n)
         void ancestors(T value){
             vector<T> an;
             ancestors(value, root, an);
@@ -103,8 +103,8 @@ class BST {
             cout << endl;
         }
 
-        // Nivel                            | O(n)
-        int whatlevelamI(T value){          
+        // Nivel                            | promedio de O(log₂n)
+        int whatlevelamI(T value){
             return whatlevelamI(value, root, 0);
         }
 
@@ -160,7 +160,7 @@ class BST {
             if (value < node -> data)
                 node -> left = elimina(value, node -> left);
 
-            // Busca dereca
+            // Busca derecha
             else if (value > node -> data)
                 node -> right = elimina(value, node -> right);
 
@@ -179,9 +179,7 @@ class BST {
 
             // Si borramos la raiz
             if (node == root && (node->left == nullptr && node->right == nullptr &&
-                node->data == value)){
-                    root = nullptr;
-                }
+                node->data == value)) root = nullptr;
 
             return node;
         }
@@ -197,26 +195,33 @@ class BST {
         // Ancestros                            | O(n)
         bool ancestors(T value, Node<T>* node, vector<T>& an){
             if (!node) return false;
-            if (node -> data == value) return true; //Encontro el valor
 
             // Busca el valor en los subarboles
-            if(ancestors(value, node -> left, an) || ancestors(value, node -> right, an)){
-                an.push_back(node -> data);    // Guarda su ancestro
-                return true;
+            if (value < node -> data){
+                if (ancestors(value, node -> left, an)){
+                    an.push_back(node -> data);
+                    return true;
+                }
             }
-
-            return false;   //No encontro el valor
+            else if (value > node -> data){
+                if (ancestors(value, node -> right, an)){
+                    an.push_back(node -> data);
+                    return true;
+                }
+            }
+            else return true;   //Encontro el valor
+            return false;       //No encontro el valor
         }
 
-        // Nivel de un dato                     | O(n)
+        // Nivel de un dato                     | promedio de O(log₂n)
         int whatlevelamI(T value, Node<T>* node, int level){
             if (!node) return -1;
             if (node-> data == value) return level; // Se encuentra al nivel
-
-            int left = whatlevelamI(value, node -> left, level + 1);
-            if (left != -1) return left;    // En el arbol izquierdo
-
-            return whatlevelamI(value, node -> right, level + 1); //Arbol derecho
+            //Busca en los subarboles
+            if(value < node -> data){
+                return whatlevelamI(value, node -> left, level + 1);
+            }
+            else return whatlevelamI(value, node -> right, level + 1);
         }
 };
 
