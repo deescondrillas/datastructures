@@ -82,7 +82,7 @@ class BST {
                     cout << endl;
                     break;
                 case 4:
-                    levelOrder(root);   //Por nivel | O(n)
+                    levelByLevel(root); //Por nivel | O(n)
                     cout << endl;
                     break;
             }
@@ -139,7 +139,7 @@ class BST {
         }
 
         // Imprime recorrido por Nivel          | O(n)
-        void levelOrder(Node<T>* node){
+        void levelByLevel(Node<T>* node){
             queue<Node<T>*> a;
             a.push(root);
             while(!a.empty()){
@@ -226,37 +226,48 @@ class BST {
 };
 
 int main(){
+    // Estructura de datos
     BST<int> nums;
-    int n; cin >> n;
-    // Input
+
+    // Input del arbol                          | O(n)
+    int n;
+    cin >> n;
     for (int i = 0; i < n; i++){
-        int temp; cin  >> temp;
+        int temp;
+        cin  >> temp;
         nums.insert(temp);
     }
 
-    // Deletes
-    int m; cin >> m;
+    // Elimina m nodos del arbol                | O(m log₂n)
+    int m;
+    cin >> m;
     for (int i = 0; i < m; i++){
-        int temp; cin >> temp;
+        int temp;
+        cin >> temp;
         nums.elimina(temp);
     }
 
-    // Recorridos
+    // Recorridos                               | O(n)
     for (int i : {1,2,3,4}) nums.traversal(i);
-    // Altura del arbol
+
+    // Altura del arbol                         | O(n)
     cout << nums.height() << endl;
 
-    // Ancestros
-    int q; cin >> q;
+    // Ancestros                                | O(q log₂n)
+    int q;
+    cin >> q;
     for (int i = 0; i < q; i++){
-        int temp; cin >> temp;
+        int temp;
+        cin >> temp;
         nums.ancestors(temp);
     }
 
-    // Niveles
-    int r; cin >> r;
+    // Niveles                                  | O(r log₂n)
+    int r;
+    cin >> r;
     for (int i = 0; i < r; i++){
-        int temp; cin >> temp;
+        int temp;
+        cin >> temp;
         cout << nums.whatlevelamI(temp) << endl;
     }
 
