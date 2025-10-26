@@ -226,23 +226,20 @@ class BST {
 };
 
 int main(){
-    // Estructura de datos
+    // Estructura de datos y variables
     BST<int> nums;
+    int temp, n, m, q, r;
 
     // Input del arbol                          | O(n)
-    int n;
     cin >> n;
     for (int i = 0; i < n; i++){
-        int temp;
         cin  >> temp;
         nums.insert(temp);
     }
 
     // Elimina m nodos del arbol                | O(m log₂n)
-    int m;
     cin >> m;
     for (int i = 0; i < m; i++){
-        int temp;
         cin >> temp;
         nums.elimina(temp);
     }
@@ -254,19 +251,15 @@ int main(){
     cout << nums.height() << endl;
 
     // Ancestros                                | O(q log₂n)
-    int q;
     cin >> q;
     for (int i = 0; i < q; i++){
-        int temp;
         cin >> temp;
         nums.ancestors(temp);
     }
 
     // Niveles                                  | O(r log₂n)
-    int r;
     cin >> r;
     for (int i = 0; i < r; i++){
-        int temp;
         cin >> temp;
         cout << nums.whatlevelamI(temp) << endl;
     }
