@@ -230,7 +230,7 @@ int main(){
     BST<int> nums;
     int temp, n, m, q, r;
 
-    // Input del arbol                          | O(n)
+    // Input del arbol                          | O(n log₂n)
     cin >> n;
     for (int i = 0; i < n; i++){
         cin  >> temp;
