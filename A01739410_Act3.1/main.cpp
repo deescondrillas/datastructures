@@ -226,6 +226,10 @@ class BST {
 };
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
     // Estructura de datos y variables
     BST<int> nums;
     int temp, n, m, q, r;
