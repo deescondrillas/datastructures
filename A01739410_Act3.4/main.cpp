@@ -4,12 +4,12 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
-#include <fstream>      // Para leer y escribir archivos
+#include <fstream>
 #include "AVL.h"
 #include "Log.h"
 
-// Definiciones
-ifstream fin("bitacora.txt");       // Leer desde archivo
+// Declarar archivo de lectura
+ifstream fin("bitacora.txt");
 
 int main() {
     // Variables y estructuras de datos
@@ -17,7 +17,7 @@ int main() {
     string line;
     Log reader;
 
-    // Input desde bitacora.txt | O(n)
+    // Input desde bitacora.txt | O(n log₂n)
     while(getline(fin, line)) {
         reader.read(line);
         logs.insert(reader);
@@ -25,5 +25,4 @@ int main() {
 
     // Output a consola         | O(k log₂n)
     logs.inordenC(5);
-    logs.tree();
 }
