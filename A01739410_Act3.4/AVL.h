@@ -25,10 +25,13 @@ class AVL {
 
     // Imprime k datos de mayor a menor         | O(k log₂n)
     int inordenC(int k = 0, Node<T>* p = nullptr) {
-        p ? p : p = root;
+        if(!p) p = root;
+        // Derecha
         if(p->right) k = inordenC(k, p->right);
         if(!k--) return 0;
+        // Raiz
         p->data.print();
+        //Izquierda
         if(p->left) k = inordenC(k, p->left);
         return k;
     }
