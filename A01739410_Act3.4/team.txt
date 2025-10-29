@@ -1,0 +1,32 @@
+Act 3.4 – Actividad Integral de BST (y AVL)
+28 de octubre, 2025
+
+A01739410 – Franco De Escondrillas Vazquez {
+    Rotacion AVL
+      • AVL.h –› update()
+      • AVL.h –› avl()
+     Reflexion individual de Franco
+}
+
+A01739522 – Sergio Sebastian Cortez Yepez {
+    Log input y output
+      • Log.h –› read()
+      • Log.h –› print()
+    Reflexion individual de Sergio
+}
+
+A01739190 – Carlos Arturo Ferat Torres {
+    Insercion y recorrido del arbol
+      • AVL.h –› inordenC()
+      • AVL.h –› insert()
+     Reflexion individual de Carlos
+}
+
+En conjunto (y como parte de otras entregas) {
+    Programa principal
+     • main.cpp
+    Nodos
+    • Node.h
+    Almacenamiento de Logs
+    • Log.h
+}
