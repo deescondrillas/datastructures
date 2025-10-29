@@ -12,13 +12,6 @@ using namespace std;
 // Array para traducir meses de string a int
 string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep", "Oct", "Nov", "Dec"};
 
-// Convierte un int n a string, en formato de uno o dos dígitos (n < 10)
-string nprint(int val, bool x) {
-    string s = to_string(val);
-    if(x && s.size() < 2) s.insert(0, "0");
-    return s;
-}
-
 // Definición de clase
 class Log {
     public:
@@ -60,12 +53,12 @@ class Log {
 
         // Imprimir log
         void print() {
-            string doc;
-            doc += meses[timestamp[0]] + " " + nprint(timestamp[1], 1) + " ";
-            doc += nprint(timestamp[2], 1) + ":" + nprint(timestamp[3], 1) + ":" + nprint(timestamp[4], 1) + " ";
-            doc += nprint(ip[0], 0) + "." + nprint(ip[1], 0) + "." + nprint(ip[2], 0) + "." + nprint(ip[3], 0);
-            doc += ":" + nprint(port, 0) + " " + issue + '\n';
-            cout << doc;
+            cout.fill('0');
+            cout << meses[timestamp[0]] << " ";
+            cout.width(2);cout << timestamp[1] << " ";
+            cout.width(2);cout << timestamp[2] << ":";
+            cout.width(2);cout << timestamp[3] << ":";
+            cout.width(2);cout << timestamp[4] << " " << ip[0] << "." << ip[1] << "." << ip[2] << "." << ip[3] << ":" << port << " " << issue << endl;
             return;
         }
 
