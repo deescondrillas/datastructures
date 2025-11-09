@@ -7,6 +7,7 @@ typedef int** matriz;
 
 // Definicion de funciones
 string nombre(int);
+string its(int n);
 void dfs(matriz&, int, int, int*);
 void bfs(matriz&, int, int, int*);
 
@@ -50,7 +51,7 @@ int main() {
     for(int i = 0; i < n; ++i) {
         cout << nombre(i);
         for(int j = 0; j < size_a[i]; ++j) {
-            cout << " - " << nombre(lista_adyacencias[i][j]);
+            cout << " - " << its(lista_adyacencias[i][j]);
         }
         cout << endl;
     }
@@ -115,7 +116,7 @@ int sti(string s){
 // Recorrido por profundidad - DFS  | O(n)
 void dfs(matriz &a, int n, int s, int *visitados){
     visitados[s] = 1;           // Marca como visitado el vector al que llega
-    cout << nombre(s) << ' ';   // cout << cositas raras
+    cout << its(s) << ' ';   // cout << cositas raras
 
     //Visita a los vecinos
     for (int v = 0; v < n; ++v) {
@@ -135,7 +136,7 @@ void bfs(matriz &a, int n, int s, int *visitados){
     while(!q.empty()){
         int u = q.front();
         q.pop();
-        cout << nombre(u) << ' ';       // cout << cosas raras
+        cout << its(u) << ' ';       // cout << cosas raras
 
         //Explora vecinos
         for(int v = 0; v < n; ++v){
