@@ -79,12 +79,6 @@ int main() {
     return 0;
 }
 
-string nombre(int x) {
-    char nom = (char)(65 + x);
-    string s; s+= nom;
-    return s;
-}
-
 string its(int n){
     n += 'A';
     char m = '\0';
@@ -100,17 +94,6 @@ string its(int n){
         s += (char) n;
     }
     return s;
-}
-
-int sti(string s){
-    if(s.length()==1) return (int) s[0] - 'A';
-
-    int m = (int) s[0];
-    int n = (int) s[1];
-
-    m -= 'A'-1;
-    n -= 'A';
-    return m*26+n;
 }
 
 // Recorrido por profundidad - DFS  | O(n)
