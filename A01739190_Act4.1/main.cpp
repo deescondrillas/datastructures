@@ -13,16 +13,29 @@ void bfs(matriz&, int, int, int*);
 int main() {
 	// Input n y representaciones
     int n{0}; cin >> n;
+    int* size_a = new int[n]();
+    int* temp = new int[1024]();
 
+    matriz lista_adyacencias = new int*[n]();
     matriz matriz_adyacencias = new int*[n];
     for (int i = 0; i < n; i++) matriz_adyacencias[i] = new int[n]();
 
     // Input de conexiones
     for(int i = 0; i < n; ++i) {
+        int count = 0;
         for(int j = 0; j < n; ++j) {
             cin >> matriz_adyacencias[i][j];
+            if (matriz_adyacencias[i][j])
+                temp[count++] = j;
+        }
+
+        lista_adyacencias[i] = new int[count];
+        size_a[i] = count;
+        for (int k = 0; k < count; ++k){
+            lista_adyacencias[i][k] = temp[k];
         }
     }
+    delete[] temp;
 
     // Output – Matriz de adyacencias       | O(n^2)
     for(int i = 0; i < n; ++i) {
@@ -36,9 +49,8 @@ int main() {
     // Output - Lista de adyacencias        | O(n^2)
     for(int i = 0; i < n; ++i) {
         cout << nombre(i);
-        for(int j = 0; j < n; ++j) {
-            if (matriz_adyacencias[i][j])
-                cout << " - " << nombre(j);
+        for(int j = 0; j < size_a[i]; ++j) {
+            cout << " - " << nombre(lista_adyacencias[i][j]);
         }
         cout << endl;
     }
@@ -58,8 +70,11 @@ int main() {
     //Deletes
     for (int i = 0; i < n; ++i) {
         delete[] matriz_adyacencias[i];
+        delete[] lista_adyacencias[i];
     }
     delete[] matriz_adyacencias;
+    delete[] lista_adyacencias;
+    delete[] size_a;
     return 0;
 }
 
