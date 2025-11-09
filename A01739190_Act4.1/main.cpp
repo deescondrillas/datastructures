@@ -59,7 +59,7 @@ int main() {
     // Output – BFS
     int *visitados_bfs = new int[n]();
     bfs(matriz_adyacencias, n, 0, visitados_bfs);
-    cout << endl; // Enter
+    cout << "\n" << endl; // Doble Enter
 
     // Output – DFS
     int *visitados_dfs = new int[n]();
