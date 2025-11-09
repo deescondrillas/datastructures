@@ -5,6 +5,9 @@
 using namespace std;
 typedef int** matriz;
 
+// main mucho mas simple aunq no lo podemos mandar, porque no guarda la
+// lista de adyacencias, solo usa la matriz
+
 // Definicion de funciones
 string nombre(int);
 void dfs(matriz&, int, int, int*);
