@@ -46,7 +46,7 @@ int main() {
     }
     cout << endl; // Enter
 
-    // Output - Lista de adyacencias        | O(n^2)
+    // Output - Lista de adyacencias        | O(n) worst case O(n^2)
     for(int i = 0; i < n; ++i) {
         cout << nombre(i);
         for(int j = 0; j < size_a[i]; ++j) {
@@ -56,12 +56,12 @@ int main() {
     }
     cout << endl; // Enter
 
-    // Output – BFS
+    // Output – BFS                         | O(n)
     int *visitados_bfs = new int[n]();
     bfs(matriz_adyacencias, n, 0, visitados_bfs);
     cout << "\n" << endl; // Doble Enter
 
-    // Output – DFS
+    // Output – DFS                         | O(n)
     int *visitados_dfs = new int[n]();
     dfs(matriz_adyacencias, n, 0, visitados_dfs);
     cout << endl; // Enter
