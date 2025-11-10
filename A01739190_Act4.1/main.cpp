@@ -81,13 +81,13 @@ int main() {
 string its(int n){
     n += 'A';
     char m = '\0';
-    if(n>90) m = 'A'-1;
-    while(n>90){
+    if(n > 90) m = 'A'-1;
+    while(n > 90){
         n -= 26;
         m++;
     }
     string s;
-    if(m=='\0') s = (char) n;
+    if(m == '\0') s = (char) n;
     else{
         s = m;
         s += (char) n;
