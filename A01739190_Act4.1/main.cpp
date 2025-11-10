@@ -6,7 +6,6 @@ using namespace std;
 typedef int** matriz;
 
 // Definicion de funciones
-string nombre(int);
 string its(int n);
 void dfs(matriz&, int, int, int*);
 void bfs(matriz&, int, int, int*);
@@ -49,7 +48,7 @@ int main() {
 
     // Output - Lista de adyacencias        | O(n + k)
     for(int i = 0; i < n; ++i) {
-        cout << nombre(i);
+        cout << its(i);
         for(int j = 0; j < size_a[i]; ++j) {
             cout << " - " << its(lista_adyacencias[i][j]);
         }
