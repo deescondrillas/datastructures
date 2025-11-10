@@ -7,6 +7,7 @@ typedef int** matriz;
 
 // Definicion de funciones
 string nombre(int);
+string its(int n);
 void dfs(matriz&, int, int, int*);
 void bfs(matriz&, int, int, int*);
 
@@ -50,21 +51,21 @@ int main() {
     for(int i = 0; i < n; ++i) {
         cout << nombre(i);
         for(int j = 0; j < size_a[i]; ++j) {
-            cout << " - " << nombre(lista_adyacencias[i][j]);
+            cout << " - " << its(lista_adyacencias[i][j]);
         }
         cout << endl;
     }
     cout << endl; // Enter
 
-    // Output – BFS
+    // Output – BFS                         | O(n)
     int *visitados_bfs = new int[n]();
     bfs(matriz_adyacencias, n, 0, visitados_bfs);
-    cout << "\n" << endl; // Doble Enter
+    cout << endl; // Doble Enter
 
-    // Output – DFS
+    // Output – DFS                         | O(n)
     int *visitados_dfs = new int[n]();
-    dfs(matriz_adyacencias, n, 0, visitados_dfs);
     cout << endl; // Enter
+    dfs(matriz_adyacencias, n, 0, visitados_dfs);
     return 0;
 
     //Deletes
@@ -76,12 +77,6 @@ int main() {
     delete[] lista_adyacencias;
     delete[] size_a;
     return 0;
-}
-
-string nombre(int x) {
-    char nom = (char)(65 + x);
-    string s; s+= nom;
-    return s;
 }
 
 string its(int n){
@@ -101,21 +96,10 @@ string its(int n){
     return s;
 }
 
-int sti(string s){
-    if(s.length()==1) return (int) s[0] - 'A';
-
-    int m = (int) s[0];
-    int n = (int) s[1];
-
-    m -= 'A'-1;
-    n -= 'A';
-    return m*26+n;
-}
-
 // Recorrido por profundidad - DFS  | O(n)
 void dfs(matriz &a, int n, int s, int *visitados){
-    visitados[s] = 1;           // Marca como visitado el vector al que llega
-    cout << nombre(s) << ' ';   // cout << cositas raras
+    visitados[s] = 1;       // Marca como visitado
+    cout << its(s) << ' ';  // cout << cositas raras
 
     //Visita a los vecinos
     for (int v = 0; v < n; ++v) {
@@ -135,7 +119,7 @@ void bfs(matriz &a, int n, int s, int *visitados){
     while(!q.empty()){
         int u = q.front();
         q.pop();
-        cout << nombre(u) << ' ';       // cout << cosas raras
+        cout << its(u) << ' ';       // cout << cosas raras
 
         //Explora vecinos
         for(int v = 0; v < n; ++v){
