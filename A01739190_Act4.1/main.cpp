@@ -98,8 +98,8 @@ string its(int n){
 
 // Recorrido por profundidad - DFS  | O(n)
 void dfs(matriz &a, int n, int s, int *visitados){
-    visitados[s] = 1;           // Marca como visitado el vector al que llega
-    cout << its(s) << ' ';   // cout << cositas raras
+    visitados[s] = 1;       // Marca como visitado
+    cout << its(s) << ' ';  // cout << cositas raras
 
     //Visita a los vecinos
     for (int v = 0; v < n; ++v) {
