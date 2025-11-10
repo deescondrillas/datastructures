@@ -37,7 +37,7 @@ int main() {
     }
     delete[] temp;
 
-    // Output – Matriz de adyacencias       | O(n^2)
+    // Output – Matriz de adyacencias       | O(n²)
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j < n; ++j) {
             cout << matriz_adyacencias[i][j] << ' ';
@@ -46,7 +46,7 @@ int main() {
     }
     cout << endl; // Enter
 
-    // Output - Lista de adyacencias        | O(n^2)
+    // Output - Lista de adyacencias        | O(n + k)
     for(int i = 0; i < n; ++i) {
         cout << nombre(i);
         for(int j = 0; j < size_a[i]; ++j) {
