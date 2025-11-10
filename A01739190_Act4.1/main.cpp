@@ -60,12 +60,12 @@ int main() {
     // Output – BFS                         | O(n)
     int *visitados_bfs = new int[n]();
     bfs(matriz_adyacencias, n, 0, visitados_bfs);
-    cout << "\n" << endl; // Doble Enter
+    cout << endl; // Doble Enter
 
     // Output – DFS                         | O(n)
     int *visitados_dfs = new int[n]();
-    dfs(matriz_adyacencias, n, 0, visitados_dfs);
     cout << endl; // Enter
+    dfs(matriz_adyacencias, n, 0, visitados_dfs);
     return 0;
 
     //Deletes
