@@ -5,14 +5,17 @@
 // A01739190 – Carlos Arturo Ferat Torres
 
 #include <iostream>
-// #include ".h"
+#include <string>
+#include "queue.h"
 
 using namespace std;
 
 bool isDag();
 bool isTree(int, int);
 
+
 int main() {
+    string
     int n{0}, m{0};
     isDag() ? isTree(n, m) ? cout << "True" << endl : cout << "False" << endl : cout << "No es un DAG" << endl;
     return 0;
