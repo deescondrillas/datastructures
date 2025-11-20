@@ -4,8 +4,8 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
-#include "list.h"
 #include "queue.h"
+#include "list.h"
 
 #include <iostream>
 #include <string>
