@@ -4,78 +4,68 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
-#include <iostream>
-#include <string>
+#include "list.h"
 #include "queue.h"
 
+#include <iostream>
+#include <string>
+
 using namespace std;
-typedef int** lista;
 
-void loadGraph(int, int, lista&, int*&);
-bool isDag(int, lista&, int*&);
+// Funciones
+bool topologicalSort(int, List<List<int>>&, string&);
+void loadGraph(int, int, List<List<int>>&);
 bool isTree(int, int);
-int sti(string s);
+char itc(int);
+int cti(char);
 
-
+// Main
 int main() {
+    string topological;
     int n{0}, m{0};
     cin >> n >> m;
-
-    lista lista_adj = new int*[n];
-    int* sizes = new int[n]();
-
-    loadGraph(n, m, lista_adj, sizes);
-
-    isDag(n, lista_adj, sizes) ? isTree(n, m) ? cout << "True" << endl : cout << "False" << endl : cout << "No es un DAG" << endl;
-    isDag(n, lista_adj, sizes) ? cout << "True" : cout << "False";
+    // Crear lista de adyacencias
+    List<List<int>> adj_list(n);
+    // Cargar grafo
+    loadGraph(n, m, adj_list);
+    // Ordena topologicamente y determina si es un DAG
+    if(topologicalSort(n, adj_list, topological)) {
+        isTree(n, m) ? cout << "True" << endl : cout << "False" << endl;
+        cout << topological << endl;
+    }
+    //
+    else {
+        cout << "No es un DAG" << endl;
+    }
     return 0;
 }
 
-int sti(string s){
-    if(s.length()==1) return (int) s[0] - 'A';
-
-    int m = (int) s[0];
-    int n = (int) s[1];
-
-    m -= 'A'-1;
-    n -= 'A';
-    return m*26+n;
+// Convierte el identificador del nodo de numero a letra        | O(1)
+char itc(int i) {
+    return (char) i + 'A';
 }
 
+// Convierte el identificador del nodo de letra a numero        | O(1)
+int cti(char s) {
+    return (int) s - 'A';
+}
 
-void loadGraph(int n, int m, lista &lista_adj, int* &sizes){
-    int (*edges)[2] = new int[m][2];
-    int* idx = new int[n]();
-
+// Lee el input y genera el grafo correspondiente               | O(m)
+void loadGraph(int n, int m, List<List<int>>& adj_list){
     for(int i = 0; i < m; i++){
-        string a, b; cin >> a >> b;
-        edges[i][0] = sti(a);
-        edges[i][1] = sti(b);
+        char a, b; cin >> a >> b;
+        int u{cti(a)}, v{cti(b)};
+        adj_list.idx(u).push(v);
+        adj_list.idx(v).push(u);
     }
-
-    for (int i = 0; i < m; i++) {
-        int u = edges[i][0];
-        sizes[u]++;
-    }
-
-    for (int i = 0; i < n; i++)
-        lista_adj[i] = new int[sizes[i]];
-
-    for (int i = 0; i < m; i++) {
-        int u = edges[i][0];
-        int v = edges[i][1];
-        lista_adj[u][idx[u]++] = v;
-    }
-
-    delete[] idx;
-    delete[] edges;
 }
 
-bool isDag(int n, lista &listA, int* &sizes){
+
+bool topologicalSort(int n, List<List<int>>& adj_list, string& topological){
     int* inDeg = new int[n]();
 
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < sizes[i]; j++){
+        for(int j = 0; j < adj_list.size(); j++){
             int u = listA[i][j];
             inDeg[u]++;
         }

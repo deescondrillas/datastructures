@@ -1,48 +1,45 @@
 // Act 4.2 – 20 de noviembre, 2025
-
-// A01739410 – Franco De Escondrillas Vazquez
-// A01739522 – Sergio Sebastian Cortez Yepez
-// A01739190 – Carlos Arturo Ferat Torres
+// class queue
 
 #pragma once
 
 template <class T>
 class Queue {
   public:
-    //Constructor
+    // Constructor
     Queue(int size = 1024) {
-        queue = new T[size]();
+        this->queue = new T[size]();
     }
 
-    //Destructor
+    // Destructor
     ~Queue() {
-        delete[] queue;
+        delete[] this->queue;
     }
 
-    //Push
+    // Push
     void push(T data) {
-        queue[back] = data;
-        back++;
+        this->queue[back] = data;
+        this->back++;
     }
 
-    //Pop
+    // Pop
     void pop() {
         head++;
     }
 
-    //Front
+    // Front
     T front() {
-        return queue[head];
+        return this->queue[head];
     }
 
-    //Empty
+    // Empty
     bool empty() {
-        return head == back;
+        return this->head == this->back;
     }
 
-    //Size
+    // Size
     int size() {
-        return back - head;
+        return this->back - this->head;
     }
 
   private:
