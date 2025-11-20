@@ -81,7 +81,7 @@ bool topologicalSort(int n, List<List<int>>& adj_list, string& topological){
         topological += ' ';
         procesados++;
 
-        for(int i = 0; i < adj_list.idx(u).size(); i++){
+        for(int i = 0; i < adj_list.idx(u).size(); i++) {
             int v = adj_list.idx(u).idx(i);
             inDeg[v]--;
             if (inDeg[v] == 0) q.push(v);
