@@ -93,10 +93,14 @@ bool topologicalSort(int n, List<List<int>>& adj_list, string& topological){
     return procesados == n;
 }
 
+// Revisa que el grado de entrada de todos los hijos sea uno            | O(n + m)
 bool isTree(int n, int m, List<List<int>>& adj_list) {
     if(n - m != 1) return false;
-    else return true;
-    int* root = new int[n];
-    // for(int i = 0; i < n; ++i) root[i] = 0;
+    int* inDeg = new int[n];
+    for(int i = 0; i < n; ++i) inDeg[i] = 0;
+    for(int i = 0; i < n; ++i)
+        for(int j = 0; j < adj_list.idx(i).size(); ++j)
+            inDeg[j]++;
+    for(int i = 0; i < n ++i)
 
 }
