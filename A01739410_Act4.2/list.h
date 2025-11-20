@@ -1,8 +1,5 @@
 // Act 4.2 – 20 de noviembre, 2025
-
-// A01739410 – Franco De Escondrillas Vazquez
-// A01739522 – Sergio Sebastian Cortez Yepez
-// A01739190 – Carlos Arturo Ferat Torres
+// class list
 
 #pragma once
 

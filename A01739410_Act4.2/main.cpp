@@ -15,7 +15,7 @@ using namespace std;
 // Funciones
 bool topologicalSort(int, List<List<int>>&, string&);
 void loadGraph(int, int, List<List<int>>&);
-bool isTree(int, int);
+bool isTree(int, int, List<List<int>>&);
 char itc(int);
 int cti(char);
 
@@ -30,7 +30,7 @@ int main() {
     loadGraph(n, m, adj_list);
     // Ordena topologicamente y determina si es un DAG
     if(topologicalSort(n, adj_list, topological)) {
-        isTree(n, m) ? cout << "True" << endl : cout << "False" << endl;
+        isTree(n, m, adj_list) ? cout << "True" << endl : cout << "False" << endl;
         cout << topological << endl;
     } else {
         cout << "No es un DAG" << endl;
@@ -57,7 +57,7 @@ void loadGraph(int n, int m, List<List<int>>& adj_list){
     }
 }
 
-// Ordena los nodos topologicamente y determina si el grafo es un DAG   | O(n)
+// Ordena los nodos topologicamente y determina si el grafo es un DAG   | O(n + m)
 bool topologicalSort(int n, List<List<int>>& adj_list, string& topological){
     int* inDeg = new int[n]();
 
@@ -93,6 +93,10 @@ bool topologicalSort(int n, List<List<int>>& adj_list, string& topological){
     return procesados == n;
 }
 
-bool isTree(int n, int m) {
-    return (n - m) == 1;
+bool isTree(int n, int m, List<List<int>>& adj_list) {
+    if(n - m != 1) return false;
+    else return true;
+    int* root = new int[n];
+    // for(int i = 0; i < n; ++i) root[i] = 0;
+
 }
