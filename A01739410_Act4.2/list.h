@@ -6,27 +6,27 @@
 template <class T>
 class List {
     public:
-    //Constructor
+    // Constructor
     List(int size = 1024) {
         this->elements = new T[size]();
     }
 
-    //Destructor
+    // Destructor
     ~List() {
         delete[] this->elements;
     }
 
-    //Push
+    // Push
     void push(T data) {
         this->elements[back++] = data;
     }
 
-    //Front
+    // Access element by index
     T& idx(int i) {
         return this->elements[i];
     }
 
-    //Size
+    // Size
     int size() {
         return this->back - this->head;
     }
