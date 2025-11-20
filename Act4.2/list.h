@@ -25,7 +25,7 @@ class List {
     }
 
     //Front
-    T idx(int i) {
+    T& idx(int i) {
         return this->elements[i];
     }
 
