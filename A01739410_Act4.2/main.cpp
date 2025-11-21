@@ -30,10 +30,10 @@ int main() {
     loadGraph(n, m, adj_list);
     // Ordena topologicamente y determina si es un DAG
     if(topologicalSort(n, adj_list, topological)) {
-        isTree(n, m, adj_list) ? cout << "True" << endl : cout << "False" << endl;
+        isTree(n, m, adj_list) ? cout << "true" << endl : cout << "false" << endl;
         cout << topological << endl;
     } else {
-        cout << "No es un DAG" << endl;
+        cout << "NO ES UN DAG" << endl;
     }
     return 0;
 }
