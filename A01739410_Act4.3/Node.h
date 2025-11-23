@@ -1,4 +1,4 @@
-// Act 3.4 – 28 de octubre, 2025
+// Act 4.3 – 23 de noviembre, 2025
 // Clase Node
 
 #pragma once
@@ -21,11 +21,16 @@ class Node {
             return data < otherNode.data;
         }
 
-    private:
-        T data;
-        int height = 0;
-        Node* left = nullptr;
-        Node* right = nullptr;
+        // Agregar hijo
+        void add(Node child) {
+            adj = new T(child);
+            childs++;
+        }
 
-    template <class> friend class AVL;
+    private:
+        Node* adj = nullptr;
+        int childs = 0;
+        T data;
+
+    template <class> friend class Graph;
 };

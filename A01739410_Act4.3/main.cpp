@@ -1,4 +1,4 @@
-// Act 4.3 – 2x de noviembre, 2025
+// Act 4.3 – 23 de noviembre, 2025
 
 // A01739410 – Franco De Escondrillas Vazquez
 // A01739522 – Sergio Sebastian Cortez Yepez

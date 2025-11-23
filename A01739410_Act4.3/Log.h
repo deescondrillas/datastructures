@@ -9,6 +9,8 @@
 
 using namespace std;
 
+// Actualizar clase para que no contenga la info de Red y Host (primeras de la IP)
+
 // Array para traducir meses de string a int
 string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep", "Oct", "Nov", "Dec"};
 
