@@ -1,7 +1,7 @@
 // Act 4.3 – 23 de noviembre, 2025
 // Clase Node
-
 #pragma once
+#include "Node.h"
 
 template <class T>
 class Red {
