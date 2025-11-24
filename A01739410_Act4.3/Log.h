@@ -18,7 +18,7 @@ string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep",
 class Log {
     public:
         // Constructor
-        Log() {}
+        Log() : ip1(0), ip2(0), ip3(0), ip4(0), port(0), issue("") {}
 
         // Guardar linea en log
         void read(string line) {

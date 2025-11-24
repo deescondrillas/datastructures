@@ -10,6 +10,7 @@ class Host {
         int ip3 = -1;
         int ip4 = -1;
     public:
+    Host() : ip3(0), ip4(0) {}
     Host(int _ip3, int _ip4){
         ip3 = _ip3;
         ip4 = _ip4;
