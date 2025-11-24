@@ -9,7 +9,7 @@ class Red {
     private:
         int ip1 = -1;
         int ip2 = -1;
-        T *hosts = nullptr;
+        Node<T> *hosts = nullptr;
     public:
     Red(int size = 1024){
         this->hosts = new T[size]();

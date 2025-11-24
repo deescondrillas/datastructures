@@ -8,7 +8,7 @@ class Host {
     private:
         int ip3 = -1;
         int ip4 = -1;
-        T *logs = nullptr;
+        Node<T> *logs = nullptr;
     public:
     Host(int size = 1024){
         this->logs = new T[size]();

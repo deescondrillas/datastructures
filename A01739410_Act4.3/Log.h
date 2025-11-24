@@ -79,6 +79,6 @@ class Log {
     private:
         // Variables de almacenamiento
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
-        int port = 0;                           // 3. puerto
-        string issue = "";                      // 4. descripción de error
+        int port = 0;                           // 2. puerto
+        string issue = "";                      // 3. descripción de error
 };
