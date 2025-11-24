@@ -10,7 +10,7 @@ class Red {
         int ip1 = -1;
         int ip2 = -1;
     public:
-    Red(int _ip1, int ip2){
+    Red(int _ip1, int _ip2){
         ip1 = _ip1;
         ip2 = _ip2;
     }
