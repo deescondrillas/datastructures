@@ -139,12 +139,12 @@ class Graph {
         int nRedes;         // Numero de redes
         int capRedes;       // Capacidad de almacenar redes
 
-        Node<Red>* maxRed[100000000000000000];
+        Node<Red>* maxRed[65540];
         int maxRedCount{0}, maxRedSize{0};
 
-        Node<Host>* maxHost[100000000000000000];
+        Node<Host>* maxHost[65540];
         int maxHostCount{0}, maxHostSize{0};
 
-        Node<Log>* maxHostLogs[100000000000000000]; // guardamos el log más reciente de ese host
+        Node<Log>* maxHostLogs[65540]; // guardamos el log más reciente de ese host
 
 };
