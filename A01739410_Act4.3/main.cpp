@@ -7,34 +7,26 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
 #include "Graph.h"
-#include "Red.h"
-#include "Host.h"
 #include "Log.h"
 
 using namespace std;
 
 int main() {
-    Graph<Red> grafo;
-    ifstream file("bitacora.txt");
+
+    Graph<Log> graph;
     string line;
 
-    while (getline(file, line)) {
-        if (!line.empty()) {
-            grafo.insert(line);
+    ifstream fin("bitacora.txt");
+    // Leer bitacora línea por línea
+    while (getline(fin, line)) {
+        if (line.size() > 0) {
+            graph.insert(line);
         }
     }
-    file.close();
 
-    
+    fin.close();
+
     return 0;
 }
-
-/*
- * Almacenar, desde un nodo raíz, cada uno de los logs
- * El nodo raíz estará conectado a los nodos de red (primeros dos dígitos de la dirección IP)
- * El nodo de red estará conectado a los nodos con la dirección del equipo (últimos dos dígitos de la dirección IP)
- * Este último estará conectada a un nodo con el resto de la información
- *
- * Grado de salida en el primer y segundo nivel (red y hosts)
- */

@@ -54,7 +54,7 @@ class Graph {
             return nuevoHost;
         }
 
-        // Funcion para insertar un nodo al grafo, o bien encontrar el nodo si este ya existe
+        // Funcion para insertar un nodo al grafo
         void insert(string line) {
 
             Log logEntry;
@@ -66,12 +66,36 @@ class Graph {
             Node<Host>* hostNode = HostManager(redNode, logEntry.ip3, logEntry.ip4);
 
             hostNode->add(logNode);
+            int sizeH = hostNode -> childs;
+            int sizeR = redNode -> childs;
 
+            if (sizeH > maxHostSize) {
+                maxHostSize = sizeH;
+                maxHostCount = 1;
+                maxHost[0] = hostNode;
+            }
+            else if (sizeH == maxHostSize) {
+                maxHost[maxHostCount++] = hostNode;
+            }
 
+            if (sizeR > maxRedSize) {
+                maxRedSize = sizeR;
+                maxRedCount = 1;
+                maxRed[0] = redNode;
+            }
+            else if (sizeR == maxRedSize) {
+                maxRed[maxRedCount++] = redNode;
+            }
         }
+
     private:
         Node<T> root;       // Nodo raiz
         Node<Red>** redes;  // "Vector" de redes
-        int nRedes;
-        int capRedes;
-};
+        int nRedes;         // Numero de redes
+        int capRedes;       // Capacidad de almacenar redes
+
+        Node<Red>* maxRed[65540];
+        int maxRedCount{0}, maxRedSize{0};
+
+        Node<Host>* maxHost[65540];
+        int maxHostCount{0}, maxHostSize{0};
