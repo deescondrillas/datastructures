@@ -23,7 +23,7 @@ class Node {
 
         // Agregar hijo
         void add(Node child) {
-            adj = new T(child);
+            adj[childs] = child;
             childs++;
         }
 
