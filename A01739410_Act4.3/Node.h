@@ -9,6 +9,9 @@ class Node {
         // Constructor
         Node(T _val) {
             data = _val;
+            capacity = 10;
+            children = new Node<T>*[capacity];
+            childs = 0;
         }
 
         // Comparar nodos
@@ -23,13 +26,27 @@ class Node {
 
         // Agregar hijo
         void add(Node child) {
-            adj[childs] = child;
-            childs++;
+            if (childs == capacity) {
+                capacity *= 2;
+                Node<T>** nuevo = new Node<T>*[capacity];
+
+                for (int i = 0; i < childs; i++) nuevo[i] = children[i];
+
+                delete[] children;
+                children = nuevo;
+            }
+
+            children[childs++] = child;
+        }
+
+        int getChilds(){
+            return childs;
         }
 
     private:
-        Node* adj = nullptr;
-        int childs = 0;
+        Node<T>** children;
+        int childs;
+        int capacity;
         T data;
 
     template <class> friend class Graph;

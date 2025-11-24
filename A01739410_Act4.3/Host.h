@@ -14,7 +14,7 @@ class Host {
         ip3 = _ip3;
         ip4 = _ip4;
     }
-    
+
     bool operator > (const Host& otherHost) const {
         if(ip3 != otherHost.ip3) return ip3 > otherHost.ip3;
         return ip4 > otherHost.ip4;
@@ -24,5 +24,5 @@ class Host {
         if(ip3 != otherHost.ip3) return ip3 < otherHost.ip3;
         return ip4 < otherHost.ip4;
     }
-    
+    template <class> friend class Graph;
 };

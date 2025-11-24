@@ -24,5 +24,5 @@ class Red {
         if(ip1 != otherRed.ip1) return ip1 < otherRed.ip1;
         return ip2 < otherRed.ip2;
     }
-    
+    template <class> friend class Graph;
 };
