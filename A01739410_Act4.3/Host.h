@@ -9,10 +9,10 @@ class Host {
     private:
         int ip3 = -1;
         int ip4 = -1;
-        Node<T> *logs = nullptr;
     public:
-    Host(int size = 1024){
-        this->logs = new T[size]();
+    Host(int _ip3, int _ip4){
+        ip3 = _ip3;
+        ip4 = _ip4;
     }
     
     bool operator > (const Host<T>& otherHost) const {

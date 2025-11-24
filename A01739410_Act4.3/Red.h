@@ -9,10 +9,10 @@ class Red {
     private:
         int ip1 = -1;
         int ip2 = -1;
-        Node<T> *hosts = nullptr;
     public:
-    Red(int size = 1024){
-        this->hosts = new T[size]();
+    Red(int _ip1, int ip2){
+        ip1 = _ip1;
+        ip2 = _ip2;
     }
 
     bool operator > (const Red<T>& otherRed) const {
