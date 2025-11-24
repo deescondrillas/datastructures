@@ -11,13 +11,13 @@ using namespace std;
 template <class T>
 class List {
     public:
-        // Constructor
+        // Constructor                      | O(1)
         List(Node<T>* _head = NULL, Node<T>* _tail = NULL) {
             head = _head;
             tail = _tail;
         }
 
-        // Insercion de elementos al final | O(1)
+        // Insercion de elementos al final  | O(1)
         void insert(T value) {
             Node<T>* newNode = new Node<T>(value, tail, NULL);
             if(!head) head = newNode;
@@ -25,6 +25,7 @@ class List {
             tail = newNode;
         }
 
+        // Merge de nodos similares         | O(1)
         void merge(List<T>& otherList) {
             if(!otherList.head) return;
             if(!head) {
@@ -40,7 +41,7 @@ class List {
 
         }
 
-        // Ordenamiento ascendentemente | O(n log₂n)
+        // Ordenamiento ascendentemente     | O(n log₂n)
         void mergesort() {
             // Condicion base
             if (head == tail) return;
@@ -55,7 +56,7 @@ class List {
                 }
             }
 
-            // Separacion de listas O(1)
+            // Separacion de listas
             List<T> newList(slowP->next, tail);
             tail = slowP;
             tail->next->prev = NULL;

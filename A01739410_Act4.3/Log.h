@@ -15,11 +15,11 @@ string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep",
 // Definición de clase
 class Log {
     public:
-        // Constructor
+        // Constructor                  | O(1)
         Log() {
 
         }
-
+        // Constructor con parametros   | O(1)
         Log(int t[5], int d[4], int p, string s) {
             for(int i = 0; i < 5; ++i) this->timestamp[i] = t[i];
             for(int i = 0; i < 4; ++i) this->ip[i] = d[i];
@@ -27,7 +27,7 @@ class Log {
             this->port = p;
         }
 
-        // Guardar linea en log
+        // Guardar linea en log         | O(1)
         void read(string line) {
             stringstream lin(line);
             string mes, dia, hora, ips, puerto, mensaje;
@@ -58,35 +58,12 @@ class Log {
             issue = mensaje;
         }
 
-        // Obtener red
+        // Crear red                    | O(1)
         Ip<Ip<Log>> getNet() {
             Log log(timestamp, ip, port, issue);
-            // Create host list
             Ip<Log> host(ip[2], ip[3], &log);
-            // Create net list
             Ip<Ip<Log>> net(ip[0], ip[1], &host);
             return net;
-        }
-
-        // End recursion
-        void mergesort() {
-            return;
-        }
-
-        // End recursion
-        void merge(Log* node) {
-            cout << "done" << endl;
-            return;
-        }
-
-        void print() {
-            cout.fill('0');
-            cout << meses[timestamp[0]] << " ";
-            cout.width(2);cout << timestamp[1] << " ";
-            cout.width(2);cout << timestamp[2] << ":";
-            cout.width(2);cout << timestamp[3] << ":";
-            cout.width(2);cout << timestamp[4] << " " << ip[0] << "." << ip[1] << "." << ip[2] << "." << ip[3] << ":" << port << " " << issue << endl;
-            return;
         }
 
     private:

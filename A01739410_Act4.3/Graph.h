@@ -7,12 +7,12 @@
 
 class Graph {
     public:
-        // Constructor
+        // Constructor                              | O(1)
         Graph() {
 
         }
 
-        // Insert new node                          | O(1)
+        // Insertar nuevo nodo                      | O(1)
         void insert(Ip<Ip<Log>> ip) {
             network.insert(ip);
         }

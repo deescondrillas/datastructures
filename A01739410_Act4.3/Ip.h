@@ -8,7 +8,7 @@
 template <class T>
 class Ip {
     public:
-        // Constructor
+        // Constructor              | O(1)
         Ip(int x = -1, int y = -1, T* node = nullptr) {
             if(node) this->adj.insert(*node);
             outDeg = node ? 1 : 0;
@@ -16,33 +16,29 @@ class Ip {
             this->dirTwo = y;
         }
 
-        // Compare IPs              | O(1)
+        // Comparacion de IPs       | O(1)
         bool operator < (const Ip& otherIp) const {
             if(dirOne == otherIp.dirOne) return dirTwo < otherIp.dirTwo;
             return dirOne < otherIp.dirOne;
         }
 
-        // Compare IPs              | O(1)
+        // Comparacion de IPs       | O(1)
         bool operator == (const Ip& otherIp) const {
             return dirOne == otherIp.dirOne && dirTwo == otherIp.dirTwo;
         }
 
-        // Print IP                 | O(1)
+        // Imprimir IP              | O(1)
         void print() {
             cout << dirOne << '.' << dirTwo;
         }
 
-        // Merge identical IPs      | O(1)
+        // Merge IPs identicas     | O(1)
         void merge(Ip<T>& node) {
             this->adj.merge(node.adj);
             outDeg += node.degree();
         }
 
-        // Adjacent list mergesort  | O(n log₂n)
-        void mergesort() {
-            adj.mergesort();
-        }
-
+        // Obtener hijos            | O(1)
         int degree() {
             return outDeg;
         }

@@ -2,8 +2,8 @@ Act 4.2 – Actividad Integral de Grafos
 23 de Noviembre, 2025
 
 A01739410 – Franco De Escondrillas Vazquez {
-    Estructura de clases Log, Host, Red, Graph.
-    Log Input y Output
+      • Estructura de clases Graph, Log, Ip, List, Node.
+      • Log Input y Output
     Reflexion individual de Franco
 
 }
@@ -16,8 +16,8 @@ A01739522 – Sergio Sebastian Cortez Yepez {
 }
 
 A01739190 – Carlos Arturo Ferat Torres {
-    Creación del grafo con distintos nodos.
-     Reflexion individual de Carlos
+      • Creación del grafo con distintos nodos
+    Reflexion individual de Carlos
 }
 
 En conjunto (y como parte de otras entregas) {

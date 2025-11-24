@@ -17,20 +17,21 @@ int main() {
     Graph logs;
     Log reader;
 
-    // Input desde bitacora.txt | O(n log₂n)
+    // Input desde bitacora.txt | O(n)
     while(getline(fin, line)) {
         reader.read(line);
         logs.insert(reader.getNet());
     }
 
-    // Ordenar, mergear y obtener maximos
+    // Ordenar y mergear        | O(n log₂n)
     logs.mergesort();
+
+    // Obener maximos           | O(n)
     logs.get_degree(&dNet, &dHost);
 
-    // Output a consola         | O(k log₂n)
+    // Output a consola         | O(n)
     logs.print(&dNet, &dHost);
 
-    cout << dNet << ' ' << dHost << endl;
-
+    // cout << dNet << ' ' << dHost << endl;
     return 0;
 }
