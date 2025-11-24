@@ -55,8 +55,8 @@ class Graph {
         }
 
         // Funcion para insertar un nodo al grafo
+        // Lleva registro de red(es) y host(s) mas grandes
         void insert(string line) {
-
             Log logEntry;
             logEntry.read(line);
 
@@ -64,8 +64,8 @@ class Graph {
 
             Node<Red>* redNode  = RedManager(logEntry.ip1, logEntry.ip2);
             Node<Host>* hostNode = HostManager(redNode, logEntry.ip3, logEntry.ip4);
-
             hostNode->add(logNode);
+
             int sizeH = hostNode -> childs;
             int sizeR = redNode -> childs;
 
@@ -74,19 +74,33 @@ class Graph {
                 maxHostCount = 1;
                 maxHost[0] = hostNode;
             }
-            else if (sizeH == maxHostSize) {
-                maxHost[maxHostCount++] = hostNode;
-            }
+            else if (sizeH == maxHostSize) maxHost[maxHostCount++] = hostNode;
+
 
             if (sizeR > maxRedSize) {
                 maxRedSize = sizeR;
                 maxRedCount = 1;
                 maxRed[0] = redNode;
             }
-            else if (sizeR == maxRedSize) {
-                maxRed[maxRedCount++] = redNode;
+            else if (sizeR == maxRedSize) maxRed[maxRedCount++] = redNode;
+        }
+
+        //Imprime redes con mas hosts
+        void printMaxRedes() {
+            for (int i = 0; i < maxRedCount; i++) {
+                Node<Red>* r = maxRed[i];
+                cout << r->data.ip1 << "." << r->data.ip2 << "\n";
             }
         }
+
+        //Imprime hosts mas visitados
+        void printMaxHosts() {
+            for (int i = 0; i < maxHostCount; i++) {
+                Node<Host>* h = maxHost[i];
+                cout << h->data.ip3 << "." << h->data.ip4 << "\n";
+            }
+        }
+
 
     private:
         Node<T> root;       // Nodo raiz
@@ -99,3 +113,4 @@ class Graph {
 
         Node<Host>* maxHost[65540];
         int maxHostCount{0}, maxHostSize{0};
+};
