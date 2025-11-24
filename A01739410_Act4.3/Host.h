@@ -3,7 +3,6 @@
 #pragma once
 
 
-
 class Host {
     // Clase para guardar la IP del host
     private:

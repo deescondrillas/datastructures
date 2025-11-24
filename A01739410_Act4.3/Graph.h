@@ -66,19 +66,28 @@ class Graph {
             Node<Host>* hostNode = HostManager(redNode, logEntry.ip3, logEntry.ip4);
             hostNode->add(logNode);
 
-            int sizeH = hostNode -> childs;
-            int sizeR = redNode -> childs;
+            int sizeH = hostNode -> getChilds();
+            int sizeR = redNode -> getChilds();
 
             if (sizeH > maxHostSize) {
                 maxHostSize = sizeH;
                 maxHostCount = 1;
-                maxHost[0] = hostNode;
                 maxHostLogs[0] = logNode;   // Guardamos un log para imprimir la IP completa
             }
             else if (sizeH == maxHostSize) {
-                maxHost[maxHostCount] = hostNode;
-                maxHostLogs[maxHostCount] = logNode;
-                maxHostCount++;
+                // Verificar duplicados
+                bool exists = false;
+                for (int i = 0; i < maxHostCount; i++) {
+                    if (maxHost[i] == hostNode) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists){
+                    maxHost[maxHostCount] = hostNode;
+                    maxHostLogs[maxHostCount] = logNode;
+                    maxHostCount++;
+                }
             }
 
 
@@ -87,7 +96,19 @@ class Graph {
                 maxRedCount = 1;
                 maxRed[0] = redNode;
             }
-            else if (sizeR == maxRedSize) maxRed[maxRedCount++] = redNode;
+            else if (sizeR == maxRedSize) {
+                // Evitar duplicados
+                bool exists = false;
+                for (int i = 0; i < maxRedCount; i++) {
+                    if (maxRed[i] == redNode) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    maxRed[maxRedCount++] = redNode;
+                }
+            }
         }
 
         //Imprime redes con mas hosts
@@ -118,13 +139,12 @@ class Graph {
         int nRedes;         // Numero de redes
         int capRedes;       // Capacidad de almacenar redes
 
-        Node<Red>* maxRed[65540];
+        Node<Red>* maxRed[100000000000000000];
         int maxRedCount{0}, maxRedSize{0};
 
-        Node<Host>* maxHost[65540];
+        Node<Host>* maxHost[100000000000000000];
         int maxHostCount{0}, maxHostSize{0};
 
-        Node<Log>* maxHostLogs[65540]; // guardamos el log más reciente de ese host
-        int maxHostLogCount{0};
-        int maxHostLogSize{0};
+        Node<Log>* maxHostLogs[100000000000000000]; // guardamos el log más reciente de ese host
+
 };

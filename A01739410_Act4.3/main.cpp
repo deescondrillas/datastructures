@@ -30,6 +30,7 @@ int main() {
     fin.close();
 
     graph.printMaxRedes();
+    cout << endl;
     graph.printMaxHosts();
 
     return 0;
