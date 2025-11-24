@@ -12,7 +12,11 @@ template <class T>
 class Node : public NodeBase {
     public:
         // Constructor
-        Node() {}  // constructor por defecto
+        Node() {
+            capacity = 10;
+            childs = 0;
+            children = new NodeBase*[capacity];
+        }  // constructor por defecto
         Node(T _val) {
             data = _val;
             capacity = 10;
