@@ -55,6 +55,6 @@ class Log {
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
         int ip1{0}, ip2{0}, ip3{0}, ip4{0};     // 2. secciones de IP
         int port = 0;                           // 3. puerto
-        string issue = "";
-    template <class> friend class Graph;// 4. descripción de error
+        string issue = "";                      // 4. descripción de error
+    template <class> friend class Graph;
 };

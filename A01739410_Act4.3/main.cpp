@@ -5,13 +5,28 @@
 // A01739190 – Carlos Arturo Ferat Torres
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Graph.h"
 #include "Red.h"
 #include "Host.h"
 #include "Log.h"
 
+using namespace std;
 
 int main() {
+    Graph<Red> grafo;
+    ifstream file("bitacora.txt");
+    string line;
+
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            grafo.insert(line);
+        }
+    }
+    file.close();
+
+    
     return 0;
 }
 
