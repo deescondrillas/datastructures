@@ -1,0 +1,28 @@
+Act 4.2 – Actividad Integral de Grafos
+23 de Noviembre, 2025
+
+A01739410 – Franco De Escondrillas Vazquez {
+    Estructura de clases Log, Host, Red, Graph.
+    Log Input y Output
+     Reflexion individual de Franco
+
+}
+
+A01739522 – Sergio Sebastian Cortez Yepez {
+    Manejo de Node
+      • Polimorfismo de los distintos tipos de nodo
+      • Insercion de multiples tipos de nodo
+    Reflexion individual de Sergio
+}
+
+A01739190 – Carlos Arturo Ferat Torres {
+    Creación del grafo con distintos nodos.
+     Reflexion individual de Carlos
+}
+
+En conjunto (y como parte de otras entregas) {
+    Programa principal
+     • main.cpp
+    Almacenamiento de Logs
+    • Log.h
+}
