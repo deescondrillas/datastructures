@@ -18,9 +18,7 @@ string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep",
 class Log {
     public:
         // Constructor
-        Log(int *_ip = NULL) {
-            if(_ip) for(int i = 0; i < 4; ++i) ip[i] = _ip[i];
-        }
+        Log() {}
 
         // Guardar linea en log
         void read(string line) {
@@ -39,11 +37,10 @@ class Log {
             timestamp[3] = stoi(hora);
             getline(lin, hora, ' ');
             timestamp[4] = stoi(hora);
-            // Guardar IP
+            // Saltar IP
             for(int i = 0; i < 4; ++i) {
                 if(i < 3) getline(lin, ips, '.');
                 else getline(lin, ips, ':');
-                ip[i] = stoi(ips);
             }
             // Guardar puerto
             getline(lin, puerto, ' ');
@@ -53,23 +50,9 @@ class Log {
             issue = mensaje;
         }
 
-        // Imprimir log
-        void print() {
-            cout.fill('0');
-            cout << meses[timestamp[0]] << " ";
-            cout.width(2);cout << timestamp[1] << " ";
-            cout.width(2);cout << timestamp[2] << ":";
-            cout.width(2);cout << timestamp[3] << ":";
-            cout.width(2);cout << timestamp[4] << " " << ip[0] << "." << ip[1] << "." << ip[2] << "." << ip[3] << ":" << port << " " << issue << endl;
-            return;
-        }
-
-        // Sobrecarga para ordenar logs
+        /* Sobrecarga para ordenar logs
         bool operator > (const Log& log) const {
-            for(int i = 0; i < 4; ++i) {
-                if(ip[i] > log.ip[i]) return 1;
-                if(ip[i] < log.ip[i]) return 0;
-            }
+ 
             if(port > log.port) return 1;
             if(port < log.port) return 0;
             for(int i = 0; i < 5; ++i) {
@@ -78,14 +61,11 @@ class Log {
             }
             if(issue > log.issue) return 1;
             return 0;
-        }
+        }*/
 
-        // Sobrecarga para ordenar logs
+        /* Sobrecarga para ordenar logs
         bool operator < (const Log& log) const {
-            for(int i = 0; i < 4; ++i) {
-                if(ip[i] < log.ip[i]) return 1;
-                if(ip[i] > log.ip[i]) return 0;
-            }
+
             if(port < log.port) return 1;
             if(port > log.port) return 0;
             for(int i = 0; i < 5; ++i) {
@@ -94,12 +74,11 @@ class Log {
             }
             if(issue < log.issue) return 1;
             return 0;
-        }
+        }*/
 
     private:
         // Variables de almacenamiento
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
-        int ip[4] = {0, 0, 0, 0};               // 2. primera, segunda, tercera, cuarta address
         int port = 0;                           // 3. puerto
         string issue = "";                      // 4. descripción de error
 };
