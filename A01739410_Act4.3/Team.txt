@@ -4,7 +4,7 @@ Act 4.2 – Actividad Integral de Grafos
 A01739410 – Franco De Escondrillas Vazquez {
     Estructura de clases Log, Host, Red, Graph.
     Log Input y Output
-     Reflexion individual de Franco
+    Reflexion individual de Franco
 
 }
 
