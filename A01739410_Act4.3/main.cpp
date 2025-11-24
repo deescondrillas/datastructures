@@ -19,6 +19,7 @@ int main() {
     string line;
 
     ifstream fin("bitacora.txt");
+
     // Leer bitacora línea por línea
     while (getline(fin, line)) {
         if (line.size() > 0) {
@@ -27,6 +28,9 @@ int main() {
     }
 
     fin.close();
+
+    graph.printMaxRedes();
+    graph.printMaxHosts();
 
     return 0;
 }
