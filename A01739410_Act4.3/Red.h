@@ -3,7 +3,7 @@
 #pragma once
 #include "Node.h"
 
-template <class T>
+
 class Red {
     // Clase para guardar la direccion de red
     private:
@@ -15,12 +15,12 @@ class Red {
         ip2 = _ip2;
     }
 
-    bool operator > (const Red<T>& otherRed) const {
+    bool operator > (const Red& otherRed) const {
         return ip1 > otherRed.ip1;
         if(ip1 == otherRed.ip1) return ip2 > otherRed.ip2;
     }
 
-    bool operator < (const Red<T>& otherRed) const {
+    bool operator < (const Red& otherRed) const {
         return ip1 < otherRed.ip1;
         if(ip1 == otherRed.ip1) return ip2 < otherRed.ip2;
     }

@@ -3,7 +3,7 @@
 #pragma once
 #include "Node.h"
 
-template <class T>
+
 class Host {
     // Clase para guardar la IP del host
     private:
@@ -15,12 +15,12 @@ class Host {
         ip4 = _ip4;
     }
     
-    bool operator > (const Host<T>& otherHost) const {
+    bool operator > (const Host& otherHost) const {
         return ip3 > otherHost.ip3;
         if(ip3 == otherHost.ip3) return ip4 > otherHost.ip4;
     }
 
-    bool operator < (const Host<T>& otherHost) const {
+    bool operator < (const Host& otherHost) const {
         return ip3 < otherHost.ip3;
         if(ip3 == otherHost.ip3) return ip4 < otherHost.ip4;
     }
