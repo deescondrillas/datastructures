@@ -4,6 +4,13 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
+#include <iostream>
+#include "Graph.h"
+#include "Red.h"
+#include "Host.h"
+#include "Log.h"
+
+
 int main() {
     return 0;
 }

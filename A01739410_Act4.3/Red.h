@@ -1,7 +1,7 @@
 // Act 4.3 – 23 de noviembre, 2025
 // Clase Node
 #pragma once
-#include "Node.h"
+
 
 
 class Red {
@@ -16,13 +16,13 @@ class Red {
     }
 
     bool operator > (const Red& otherRed) const {
-        return ip1 > otherRed.ip1;
-        if(ip1 == otherRed.ip1) return ip2 > otherRed.ip2;
+        if(ip1 != otherRed.ip1) return ip1 > otherRed.ip1;
+        return ip2 > otherRed.ip2;
     }
 
     bool operator < (const Red& otherRed) const {
-        return ip1 < otherRed.ip1;
-        if(ip1 == otherRed.ip1) return ip2 < otherRed.ip2;
+        if(ip1 != otherRed.ip1) return ip1 < otherRed.ip1;
+        return ip2 < otherRed.ip2;
     }
     
 };

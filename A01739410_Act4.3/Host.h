@@ -1,7 +1,7 @@
 // Act 4.3 – 23 de noviembre, 2025
 // Clase Node
 #pragma once
-#include "Node.h"
+
 
 
 class Host {
@@ -16,13 +16,13 @@ class Host {
     }
     
     bool operator > (const Host& otherHost) const {
-        return ip3 > otherHost.ip3;
-        if(ip3 == otherHost.ip3) return ip4 > otherHost.ip4;
+        if(ip3 != otherHost.ip3) return ip3 > otherHost.ip3;
+        return ip4 > otherHost.ip4;
     }
 
     bool operator < (const Host& otherHost) const {
-        return ip3 < otherHost.ip3;
-        if(ip3 == otherHost.ip3) return ip4 < otherHost.ip4;
+        if(ip3 != otherHost.ip3) return ip3 < otherHost.ip3;
+        return ip4 < otherHost.ip4;
     }
     
 };
