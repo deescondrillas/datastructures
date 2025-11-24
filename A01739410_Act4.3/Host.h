@@ -1,8 +1,7 @@
 // Act 4.3 – 23 de noviembre, 2025
-// Clase Node
+// Clase Host
+
 #pragma once
-
-
 
 class Host {
     // Clase para guardar la IP del host

@@ -2,6 +2,7 @@
 // Clase Graph
 
 #pragma once
+
 #include "Node.h"
 #include "Red.h"
 #include "Host.h"
