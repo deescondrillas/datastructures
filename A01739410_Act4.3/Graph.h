@@ -2,149 +2,82 @@
 // Clase Graph
 
 #pragma once
-#include "Node.h"
-#include "Red.h"
-#include "Host.h"
+
 #include "Log.h"
 
-template <class T>
 class Graph {
     public:
-        //Constructor
+        // Constructor
         Graph() {
-            capRedes = 10;
-            nRedes = 0;
-            redes = new Node<Red>*[capRedes];
+
         }
 
-        // Obtener o crear red
-        Node<Red>* RedManager(int ip1, int ip2){
-            // Busca la red
-            for(int i = 0; i < nRedes; i++){
-                if (redes[i] -> data.ip1 == ip1 &&
-                    redes[i]->data.ip2 == ip2){
-                    return redes[i];
+        // Insert new node                          | O(1)
+        void insert(Ip<Ip<Log>> ip) {
+            network.insert(ip);
+        }
+
+        // Mergesort                                | O(n log₂n)
+        void mergesort() {
+            network.mergesort();
+            Node<Ip<Ip<Log>>>* pointer = network.head;
+            while(pointer) {
+                pointer->data.adj.mergesort();
+                pointer = pointer->next;
+            }
+        }
+
+        // Print net with max degree                | O(n)
+        void get_degree(int* dNet, int* dHost) {
+            Node<Ip<Ip<Log>>>* net_node = network.head;
+            Node<Ip<Log>>* host_node;
+            while(net_node) {
+                // Inside loop
+                host_node = net_node->data.adj.head;
+                while(host_node) {
+                    *dHost = max(*dHost, host_node->degree());
+                    host_node = host_node->next;
                 }
-            }
-            // Si no existe la crea
-            if(nRedes == capRedes){
-                capRedes *= 2;
-                Node<Red>** temp = new Node<Red>*[capRedes];
-                for(int i = 0; i < nRedes; i++) temp[i] = redes[i];
-                delete[] redes;
-                redes = temp;
-            }
 
-            Node<Red>* nuevaRed = new Node<Red>(Red(ip1, ip2));
-            redes[nRedes++] = nuevaRed;
-            return nuevaRed;
+                // Outside loop
+                *dNet = max(*dNet, net_node->degree());
+                net_node = net_node->next;
+            }
         }
 
-        // Obtener o crear hosts
-        Node<Host>* HostManager(Node<Red>* redNode, int ip3, int ip4){
-            for (int i = 0; i < redNode -> childs; i++){
-                Node<Host>* h = (Node<Host>*) redNode->children[i];
-                if (h -> data.ip3 == ip3 && h -> data.ip4 == ip4){
-                    return h;
+        // Print networks and hosts with max degree | O(n)
+        void print(int* dNet, int* dHost) {
+            // Net
+            Node<Ip<Ip<Log>>>* net_node = network.head;
+            // Outside loop
+            while(net_node) {
+                if(*dNet == net_node->degree()) {
+                    net_node->print();
+                    cout << endl;
                 }
+                net_node = net_node->next;
             }
 
-            Node<Host>* nuevoHost = new Node<Host>(Host(ip3, ip4));
-            redNode -> add(nuevoHost);
-            return nuevoHost;
-        }
-
-        // Funcion para insertar un nodo al grafo
-        // Lleva registro de red(es) y host(s) mas grandes
-        void insert(string line) {
-            Log logEntry;
-            logEntry.read(line);
-
-            Node<Log>* logNode = new Node<Log>(logEntry);
-
-            Node<Red>* redNode  = RedManager(logEntry.ip1, logEntry.ip2);
-            Node<Host>* hostNode = HostManager(redNode, logEntry.ip3, logEntry.ip4);
-            hostNode->add(logNode);
-
-            int sizeH = hostNode -> getChilds();
-            int sizeR = redNode -> getChilds();
-
-            if (sizeH > maxHostSize) {
-                maxHostSize = sizeH;
-                maxHostCount = 1;
-                maxHostLogs[0] = logNode;   // Guardamos un log para imprimir la IP completa
-            }
-            else if (sizeH == maxHostSize) {
-                // Verificar duplicados
-                bool exists = false;
-                for (int i = 0; i < maxHostCount; i++) {
-                    if (maxHost[i] == hostNode) {
-                        exists = true;
-                        break;
+            // Host
+            cout << endl;
+            net_node = network.head;
+            Node<Ip<Log>>* host_node;
+            // Inside loop
+            while(net_node) {
+                host_node = net_node->data.adj.head;
+                while(host_node) {
+                    if(*dHost == host_node->degree()) {
+                        net_node->print();
+                        cout << '.';
+                        host_node->print();
+                        cout << endl;
                     }
+                    host_node = host_node->next;
                 }
-                if (!exists){
-                    maxHost[maxHostCount] = hostNode;
-                    maxHostLogs[maxHostCount] = logNode;
-                    maxHostCount++;
-                }
-            }
-
-
-            if (sizeR > maxRedSize) {
-                maxRedSize = sizeR;
-                maxRedCount = 1;
-                maxRed[0] = redNode;
-            }
-            else if (sizeR == maxRedSize) {
-                // Evitar duplicados
-                bool exists = false;
-                for (int i = 0; i < maxRedCount; i++) {
-                    if (maxRed[i] == redNode) {
-                        exists = true;
-                        break;
-                    }
-                }
-                if (!exists) {
-                    maxRed[maxRedCount++] = redNode;
-                }
+                net_node = net_node->next;
             }
         }
-
-        //Imprime redes con mas hosts
-        void printMaxRedes() {
-            for (int i = 0; i < maxRedCount; i++) {
-                Node<Red>* r = maxRed[i];
-                cout << r->data.ip1 << "." << r->data.ip2 << "\n";
-            }
-        }
-
-        //Imprime hosts mas visitados
-        void printMaxHosts() {
-            for (int i = 0; i < maxHostCount; i++) {
-                    Node<Log>* h = maxHostLogs[i];
-
-                    // Imprimir IP completa tal como la pide el enunciado
-                    cout << h->data.ip1 << "."
-                         << h->data.ip2 << "."
-                         << h->data.ip3 << "."
-                         << h->data.ip4 << "\n";
-                }
-        }
-
 
     private:
-        Node<T> root;       // Nodo raiz
-        Node<Red>** redes;  // "Vector" de redes
-        int nRedes;         // Numero de redes
-        int capRedes;       // Capacidad de almacenar redes
-
-        Node<Red>* maxRed[65540];
-        int maxRedCount{0}, maxRedSize{0};
-
-        Node<Host>* maxHost[65540];
-        int maxHostCount{0}, maxHostSize{0};
-
-        Node<Log>* maxHostLogs[65540]; // guardamos el log más reciente de ese host
-
+        List<Ip<Ip<Log>>> network;
 };

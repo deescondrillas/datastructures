@@ -1,15 +1,13 @@
-// Act 3.4 – 28 de octubre, 2025
+// Act 4.3 – 23 de noviembre, 2025
 // Clase Log
 
 #pragma once
 
-#include <iostream>
 #include <sstream>
 #include <string>
+#include "Ip.h"
 
 using namespace std;
-
-// Actualizar clase para que no contenga la info de Red y Host (primeras de la IP)
 
 // Array para traducir meses de string a int
 string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep", "Oct", "Nov", "Dec"};
@@ -18,7 +16,16 @@ string meses[13] = {"","Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug","Sep",
 class Log {
     public:
         // Constructor
-        Log() : ip1(0), ip2(0), ip3(0), ip4(0), port(0), issue("") {}
+        Log() {
+
+        }
+
+        Log(int t[5], int d[4], int p, string s) {
+            for(int i = 0; i < 5; ++i) this->timestamp[i] = t[i];
+            for(int i = 0; i < 4; ++i) this->ip[i] = d[i];
+            this->issue = s;
+            this->port = p;
+        }
 
         // Guardar linea en log
         void read(string line) {
@@ -37,11 +44,12 @@ class Log {
             timestamp[3] = stoi(hora);
             getline(lin, hora, ' ');
             timestamp[4] = stoi(hora);
-            // Leer IP:
-            getline(lin, ips, '.'); ip1 = stoi(ips);
-            getline(lin, ips, '.'); ip2 = stoi(ips);
-            getline(lin, ips, '.'); ip3 = stoi(ips);
-            getline(lin, ips, ':'); ip4 = stoi(ips);
+            // Guardar IP
+            for(int i = 0; i < 4; ++i) {
+                if(i < 3) getline(lin, ips, '.');
+                else getline(lin, ips, ':');
+                ip[i] = stoi(ips);
+            }
             // Guardar puerto
             getline(lin, puerto, ' ');
             port = stoi(puerto);
@@ -50,11 +58,41 @@ class Log {
             issue = mensaje;
         }
 
+        // Obtener red
+        Ip<Ip<Log>> getNet() {
+            Log log(timestamp, ip, port, issue);
+            // Create host list
+            Ip<Log> host(ip[2], ip[3], &log);
+            // Create net list
+            Ip<Ip<Log>> net(ip[0], ip[1], &host);
+            return net;
+        }
+
+        // End recursion
+        void mergesort() {
+            return;
+        }
+
+        // End recursion
+        void merge(Log* node) {
+            cout << "done" << endl;
+            return;
+        }
+
+        void print() {
+            cout.fill('0');
+            cout << meses[timestamp[0]] << " ";
+            cout.width(2);cout << timestamp[1] << " ";
+            cout.width(2);cout << timestamp[2] << ":";
+            cout.width(2);cout << timestamp[3] << ":";
+            cout.width(2);cout << timestamp[4] << " " << ip[0] << "." << ip[1] << "." << ip[2] << "." << ip[3] << ":" << port << " " << issue << endl;
+            return;
+        }
+
     private:
         // Variables de almacenamiento
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
-        int ip1{0}, ip2{0}, ip3{0}, ip4{0};     // 2. secciones de IP
+        int ip[4] = {0, 0, 0, 0};               // 2. primera, segunda, tercera, cuarta address
         int port = 0;                           // 3. puerto
         string issue = "";                      // 4. descripción de error
-    template <class> friend class Graph;
 };
