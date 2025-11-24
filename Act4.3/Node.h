@@ -3,30 +3,14 @@
 
 #pragma once
 
-class NodeBase {
-public:
-    virtual ~NodeBase() {}
-};
-
 template <class T>
-class Node : public NodeBase {
+class Node {
     public:
         // Constructor
-        Node() {
-            capacity = 10;
-            childs = 0;
-            children = new NodeBase*[capacity];
-        }  // constructor por defecto
-        Node(T _val) {
-            data = _val;
-            capacity = 10;
-            children = new NodeBase*[capacity];
-            childs = 0;
-        }
-
-        // Comparar nodos
-        bool operator > (const Node<T>& otherNode) const {
-            return data > otherNode.data;
+        Node(T _val, Node* _prev, Node* _next) {
+            this->data = _val;
+            this->prev = _prev;
+            this->next = _next;
         }
 
         // Comparar nodos
@@ -34,28 +18,31 @@ class Node : public NodeBase {
             return data < otherNode.data;
         }
 
-        // Agregar hijo
-        void add(NodeBase* child) {
-            if (childs == capacity) {
-                capacity *= 2;
-                NodeBase** nuevo = new NodeBase*[capacity];
-                for (int i = 0; i < childs; i++) nuevo[i] = children[i];
-                delete[] children;
-                children = nuevo;
-            }
-
-            children[childs++] = child;
+        // Comparar nodos
+        bool operator == (const Node<T>& otherNode) const {
+            return data == otherNode.data;
         }
 
-        int getChilds(){
-            return childs;
+        // Mergesort
+        void mergesort() {
+            return;
+        }
+
+        // Get degree
+        int degree() {
+            return data.degree();
+        }
+
+        // Print node
+        void print() {
+            data.print();
         }
 
     private:
-        NodeBase** children;
-        int childs;
-        int capacity;
         T data;
+        Node* prev;
+        Node* next;
 
-    template <class> friend class Graph;
+    friend class Graph;
+    template <class> friend class List;
 };

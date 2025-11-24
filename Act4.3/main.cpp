@@ -4,34 +4,39 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
-#include <iostream>
 #include <fstream>
-#include <string>
-
 #include "Graph.h"
-#include "Log.h"
 
-using namespace std;
+// Declarar archivo de lectura
+ifstream fin("bitacorx.txt");
 
 int main() {
-
-    Graph<Log> graph;
+    // Variables y estructuras de datos
+    int dNet{0}, dHost{0};
+    bool dlc{true};
     string line;
+    Graph logs;
+    Log reader;
 
-    ifstream fin("bitacora3.txt");
-
-    // Leer bitacora línea por línea
-    while (getline(fin, line)) {
-        if (line.size() > 0) {
-            graph.insert(line);
-        }
+    // Input desde bitacora.txt | O(n)
+    while(getline(fin, line)) {
+        reader.read(line);
+        logs.insert(reader.getNet());
     }
 
-    fin.close();
+    // Ordenar y mergear        | O(n log₂n)
+    logs.mergesort();
 
-    graph.printMaxRedes();
-    cout << endl;
-    graph.printMaxHosts();
+    // Obener maximos           | O(n)
+    logs.get_degree(&dNet, &dHost);
 
+    // Output a consola         | O(n)
+    logs.print(&dNet, &dHost);
+
+    if(dlc) {
+        cout << endl;
+        cout << "Grado de salida de red: " << dNet << endl;
+        cout << "Grado de salide de host: " << dHost << endl;
+    }
     return 0;
 }
