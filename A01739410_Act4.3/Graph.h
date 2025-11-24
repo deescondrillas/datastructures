@@ -73,8 +73,13 @@ class Graph {
                 maxHostSize = sizeH;
                 maxHostCount = 1;
                 maxHost[0] = hostNode;
+                maxHostLogs[0] = logNode;   // Guardamos un log para imprimir la IP completa
             }
-            else if (sizeH == maxHostSize) maxHost[maxHostCount++] = hostNode;
+            else if (sizeH == maxHostSize) {
+                maxHost[maxHostCount] = hostNode;
+                maxHostLogs[maxHostCount] = logNode;
+                maxHostCount++;
+            }
 
 
             if (sizeR > maxRedSize) {
@@ -96,9 +101,14 @@ class Graph {
         //Imprime hosts mas visitados
         void printMaxHosts() {
             for (int i = 0; i < maxHostCount; i++) {
-                Node<Host>* h = maxHost[i];
-                cout << h->data.ip3 << "." << h->data.ip4 << "\n";
-            }
+                    Node<Log>* h = maxHostLogs[i];
+
+                    // Imprimir IP completa tal como la pide el enunciado
+                    cout << h->data.ip1 << "."
+                         << h->data.ip2 << "."
+                         << h->data.ip3 << "."
+                         << h->data.ip4 << "\n";
+                }
         }
 
 
@@ -113,4 +123,8 @@ class Graph {
 
         Node<Host>* maxHost[65540];
         int maxHostCount{0}, maxHostSize{0};
+
+        Node<Log>* maxHostLogs[65540]; // guardamos el log más reciente de ese host
+        int maxHostLogCount{0};
+        int maxHostLogSize{0};
 };
