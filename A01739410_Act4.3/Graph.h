@@ -43,7 +43,7 @@ class Graph {
         // Obtener o crear hosts
         Node<Host>* HostManager(Node<Red>* redNode, int ip3, int ip4){
             for (int i = 0; i < redNode -> childs; i++){
-                Node<Host>* h = redNode -> children[i];
+                Node<Host>* h = (Node<Host>*) redNode->children[i];
                 if (h -> data.ip3 == ip3 && h -> data.ip4 == ip4){
                     return h;
                 }
@@ -55,7 +55,18 @@ class Graph {
         }
 
         // Funcion para insertar un nodo al grafo, o bien encontrar el nodo si este ya existe
-        void insert() {
+        void insert(string line) {
+
+            Log logEntry;
+            logEntry.read(line);
+
+            Node<Log>* logNode = new Node<Log>(logEntry);
+
+            Node<Red>* redNode  = RedManager(logEntry.ip1, logEntry.ip2);
+            Node<Host>* hostNode = HostManager(redNode, logEntry.ip3, logEntry.ip4);
+
+            hostNode->add(logNode);
+
 
         }
     private:

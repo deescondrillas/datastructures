@@ -37,11 +37,11 @@ class Log {
             timestamp[3] = stoi(hora);
             getline(lin, hora, ' ');
             timestamp[4] = stoi(hora);
-            // Saltar IP
-            for(int i = 0; i < 4; ++i) {
-                if(i < 3) getline(lin, ips, '.');
-                else getline(lin, ips, ':');
-            }
+            // Leer IP:
+            getline(lin, ips, '.'); ip1 = stoi(ips);
+            getline(lin, ips, '.'); ip2 = stoi(ips);
+            getline(lin, ips, '.'); ip3 = stoi(ips);
+            getline(lin, ips, ':'); ip4 = stoi(ips);
             // Guardar puerto
             getline(lin, puerto, ' ');
             port = stoi(puerto);
@@ -50,35 +50,11 @@ class Log {
             issue = mensaje;
         }
 
-        /* Sobrecarga para ordenar logs
-        bool operator > (const Log& log) const {
- 
-            if(port > log.port) return 1;
-            if(port < log.port) return 0;
-            for(int i = 0; i < 5; ++i) {
-                if(timestamp[i] > log.timestamp[i]) return 1;
-                if(timestamp[i] < log.timestamp[i]) return 0;
-            }
-            if(issue > log.issue) return 1;
-            return 0;
-        }*/
-
-        /* Sobrecarga para ordenar logs
-        bool operator < (const Log& log) const {
-
-            if(port < log.port) return 1;
-            if(port > log.port) return 0;
-            for(int i = 0; i < 5; ++i) {
-                if(timestamp[i] < log.timestamp[i]) return 1;
-                if(timestamp[i] > log.timestamp[i]) return 0;
-            }
-            if(issue < log.issue) return 1;
-            return 0;
-        }*/
-
     private:
         // Variables de almacenamiento
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
-        int port = 0;                           // 2. puerto
-        string issue = "";                      // 3. descripción de error
+        int ip1{0}, ip2{0}, ip3{0}, ip4{0};     // 2. secciones de IP
+        int port = 0;                           // 3. puerto
+        string issue = "";
+    template <class> friend class Graph;// 4. descripción de error
 };

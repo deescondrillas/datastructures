@@ -3,14 +3,19 @@
 
 #pragma once
 
+class NodeBase {
+public:
+    virtual ~NodeBase() {}
+};
+
 template <class T>
-class Node {
+class Node : public NodeBase {
     public:
         // Constructor
         Node(T _val) {
             data = _val;
             capacity = 10;
-            children = new Node<T>*[capacity];
+            children = new NodeBase*[capacity];
             childs = 0;
         }
 
@@ -25,13 +30,11 @@ class Node {
         }
 
         // Agregar hijo
-        void add(Node child) {
+        void add(NodeBase* child) {
             if (childs == capacity) {
                 capacity *= 2;
-                Node<T>** nuevo = new Node<T>*[capacity];
-
+                NodeBase** nuevo = new NodeBase*[capacity];
                 for (int i = 0; i < childs; i++) nuevo[i] = children[i];
-
                 delete[] children;
                 children = nuevo;
             }
@@ -44,7 +47,7 @@ class Node {
         }
 
     private:
-        Node<T>** children;
+        NodeBase** children;
         int childs;
         int capacity;
         T data;
