@@ -8,12 +8,12 @@
 #include "Graph.h"
 
 // Declarar archivo de lectura
-ifstream fin("bitacora.txt");
+ifstream fin("bitacorx.txt");
 
 int main() {
     // Variables y estructuras de datos
     int dNet{0}, dHost{0};
-    bool dlc{false};
+    bool dlc{true};
     string line;
     Graph logs;
     Log reader;
