@@ -32,9 +32,11 @@ class Hash {
             for(int i = 0; i < 97; ++i) {
                 int p = (hash(key) + i) % 97;
                 if(!flag[p]) return;
-                if(flag[p] == 1 && tabla[p].id() == key) flag[p] = -1;
+                if(flag[p] == 1 && tabla[p].id() == key) {
+                    flag[p] = -1;
+                    size--;
+                }
             }
-            size--;
         }
         // Buscar – sin colision O(1) || WCS O(n)
         Car* search(string key) {
