@@ -31,7 +31,7 @@ int main() {
                     break;
                 case 4: // search() – sin colision O(1) || WCS O(n)
                     cin >> key;
-                    hash.search(key) ? cout << *hash.search(key) << endl : cout << "NULL" << endl;
+                    hash.search(key) ? cout << *hash.search(key) << endl : cout << "dato no encontrado" << endl;
                     break;
             }
         }
