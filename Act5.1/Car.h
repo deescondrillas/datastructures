@@ -9,14 +9,15 @@ using namespace std;
 
 class Car {
     public:
-    // Constructor
+    // Constructor – O(1)
     Car() {
 
     }
+    // Obtener id – O(1)
     string id() {
         return placa;
     }
-    // Imprimir
+    // Imprimir – O(1)
     friend ostream& operator << (ostream& os, Car& car) {
         os << car.placa;
         os << ' ' << car.marca;
@@ -24,7 +25,7 @@ class Car {
         os << ' ' << car.agno;
         return os;
     }
-
+    // Leer – O(1)
     friend istream& operator >> (istream& is, Car& car) {
         is >> car.placa;
         is.ignore(1, '\n');

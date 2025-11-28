@@ -12,7 +12,7 @@ class Hash {
         Hash() {
 
         }
-        // Insertar
+        // Insertar – sin colision O(1) || WCS O(n)
         void ins(Car nuevo) {
             if(is_in(nuevo.id())) cout << "imposible insertar, placa duplicada" << endl;
             else if(size == 97) cout << "tabla llena, imposible insertar" << endl;
@@ -25,7 +25,7 @@ class Hash {
                 size++;
             }
         }
-        // Eliminar
+        // Eliminar – sin colision O(1) || WCS O(n)
         void del() {
             string key;
             cin >> key;
@@ -36,7 +36,7 @@ class Hash {
             }
             size--;
         }
-        // Buscar
+        // Buscar – sin colision O(1) || WCS O(n)
         Car* search(string key) {
             for(int i = 0; i < 97; ++i) {
                 int p = (hash(key) + i) % 97;
@@ -45,7 +45,7 @@ class Hash {
             }
             return nullptr;
         }
-        // Imprimir
+        // Imprimir – O(n)
         void print() {
             for(int i = 0; i < 97; i++){
                 cout << i;
