@@ -8,7 +8,7 @@ using namespace std;
 
 class Hash {
     public:
-        // Constructor
+        // Constructor – O(1)
         Hash() {
 
         }
@@ -53,7 +53,7 @@ class Hash {
                 cout << endl;
             }
         }
-        // Elemento en el set
+        // Elemento en el set – sin colision O(1) || WCS O(n)
         bool is_in(string key){
             for(int i = 0; i < 97; ++i) {
                 int p = (hash(key) + i) % 97;
@@ -70,12 +70,10 @@ class Hash {
         int flag[SIZE] = {0};
         int size{0};
 
-        // Funcion Hash
+        // Funcion Hash – O(1)
         int hash(string data) {
             int s = 0;
             for(char a: data) s += (int)a;
             return s % 97;
         }
-
-
 };
