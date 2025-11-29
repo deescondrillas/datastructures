@@ -23,7 +23,7 @@ class Red {
         //Añadir IP unica
         void insertIP(string& ip){
             nAccs++;
-            // evitar duplicados O(n)
+            // evitar duplicados
             for (int i = 0; i < IPs.Size(); i++){
                 if (IPs[i] == ip){
                     return;
@@ -43,11 +43,23 @@ class Red {
             // Alguien escriba un mergeSort
         }
 
+        // Getters
+        int getAccs(){
+            return nAccs;
+        }
+
+        int getNumIPs (){
+            return IPs.Size();
+        }
+
+        Vector<string> getIPs() {
+            return IPs;
+        }
+
     private:
         int ip1 = -1;
         int ip2 = -1;
         int nAccs = 0;
-        int Nconxs = 0;
         Vector<string> IPs;
 
         friend class Hash;
