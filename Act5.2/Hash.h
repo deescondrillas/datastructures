@@ -3,6 +3,8 @@
 
 #pragma once
 # include "Red.h"
+# include "Vector.h"
+# include <iostream>
 
 using namespace std;
 
@@ -13,58 +15,39 @@ class Hash {
 
         }
         // Insertar – sin colision O(1) || WCS O(n)
-        void ins(Red nuevo) {
-            if(is_in(nuevo.id())){
-                // aumenta cosas
-            }
-            else if(size == 65521) cout << "tabla llena, imposible insertar" << endl;
-            else {
-                int p = hash(nuevo.id());
-                // Buscar espacio
-                while(flag[p] == 1) p = (p + 1) % 97;
-                tabla[p] = nuevo;
+        void ins(int ip1, int ip2, string& ip) {
+            if(size == 65521) {
+                cout << "tabla llena, imposible insertar" << endl;
+                return;
+            };
+
+            int p = hash(ip1, ip2);
+
+            // Buscar espacio
+            while(flag[p] && !(tabla[p].ip1 == ip1 && tabla[p].ip2 == ip2))
+                p = (p + 1) % SIZE;
+
+            // Revisa si es nuevo
+            if (!flag[p]){
+                tabla[p] = Red(ip1, ip2);
                 flag[p] = 1;
                 size++;
             }
+
+            // Añade IP completa
+            tabla[p].insertIP(ip);
         }
-        // Eliminar – sin colision O(1) || WCS O(n)
-        void del() {
-            string key;
-            cin >> key;
-            for(int i = 0; i < 97; ++i) {
-                int p = (hash(key) + i) % 97;
-                if(!flag[p]) return;
-                if(flag[p] == 1 && tabla[p].id() == key) {
-                    flag[p] = -1;
-                    size--;
-                }
-            }
-        }
+
         // Buscar – sin colision O(1) || WCS O(n)
-        Red* search(string key) {
-            for(int i = 0; i < 97; ++i) {
-                int p = (hash(key) + i) % 97;
-                if(!flag[p]) return nullptr;
-                if(flag[p] == 1 && tabla[p].id() == key) return &tabla[p];
+        Red* search(int ip1, int ip2) {
+            int p = hash(ip1, ip2);
+
+            while(flag[p]){
+                if(tabla[p].ip1 == ip1 && tabla[p].ip2 == ip2)
+                    return &tabla[p];
+                p = (p + 1) % SIZE;
             }
             return nullptr;
-        }
-        // Imprimir – O(n)
-        void print() {
-            for(int i = 0; i < SIZE; i++){
-                cout << i;
-                if(flag[i] == 1) cout << ' ' << tabla[i];
-                cout << endl;
-            }
-        }
-        // Elemento en el set – sin colision O(1) || WCS O(n)
-        bool is_in(string key){
-            for(int i = 0; i < SIZE; ++i) {
-                int p = (hash(key) + i) % 97;
-                if(!flag[p]) return false;
-                if(flag[p] == 1 && tabla[p].id() == key) return true;
-            }
-            return false;
         }
 
     private:
@@ -75,9 +58,7 @@ class Hash {
         int size{0};
 
         // Funcion Hash – O(1)
-        int hash(string data) {
-            int s = 0;
-            for(char a: data) s += (int)a;
-            return s % 97;
+        int hash(int ip1, int ip2) {
+            return (ip1 * 256 + ip2) % SIZE;
         }
 };

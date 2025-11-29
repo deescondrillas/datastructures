@@ -5,7 +5,6 @@
 
 #include <sstream>
 #include <string>
-#include "Ip.h"
 
 using namespace std;
 
@@ -59,11 +58,16 @@ class Log {
         }
 
         // Crear red                    | O(1)
-        Ip<Ip<Log>> getNet() {
-            Log log(timestamp, ip, port, issue);
-            Ip<Log> host(ip[2], ip[3], &log);
-            Ip<Ip<Log>> net(ip[0], ip[1], &host);
-            return net;
+        pair<int, int> getRed() {
+            return {ip[0], ip[1]};
+        }
+
+        // Retorna la Ip como string
+        string getIP() {
+            return to_string(ip[0]) + "." +
+                    to_string(ip[1]) + "." +
+                    to_string(ip[2]) + "." +
+                    to_string(ip[3]);
         }
 
     private:

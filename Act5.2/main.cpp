@@ -4,36 +4,30 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
+#include <iostream>
+#include <fstream>
 #include "Hash.h"
+#include "Log.h"
 
 using namespace std;
 
+// Declarar archivo de bitacora
+
 int main() {
     // Variables
-    int option{4};
-    string key;
+    ifstream fin("bitacorx.txt");
+    string line;
     Hash hash;
-    Car nuevo;
+    Log entry;
 
-    // Menu
-        while(option) {
-            cin >> option;
-            switch(option) {
-                case 1: // ins() – sin colision O(1) || WCS O(n)
-                    cin >> nuevo;
-                    hash.ins(nuevo);
-                    break;
-                case 2: // del() – sin colision O(1) || WCS O(n)
-                    hash.del();
-                    break;
-                case 3: // print() | O(n)
-                    hash.print();
-                    break;
-                case 4: // search() – sin colision O(1) || WCS O(n)
-                    cin >> key;
-                    hash.search(key) ? cout << *hash.search(key) << endl : cout << "dato no encontrado" << endl;
-                    break;
-            }
-        }
+    // Leer archivo de bitacora
+    while (getline(fin, line)) {
+        entry.read(line);
+
+        pair red = entry.getRed();
+        string ip = entry.getIP();
+        hash.ins(red.first, red.second, ip);
+    }
+
     return 0;
 }

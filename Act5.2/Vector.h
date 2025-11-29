@@ -98,4 +98,6 @@ private:
         data = new_data;
         capacity = newSize;
     }
+
+    friend class Red;
 };
