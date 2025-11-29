@@ -2,7 +2,7 @@
 // class Hash
 
 #pragma once
-# include "red"
+# include "Red.h"
 
 using namespace std;
 
@@ -13,9 +13,11 @@ class Hash {
 
         }
         // Insertar – sin colision O(1) || WCS O(n)
-        void ins(Car nuevo) {
-            if(is_in(nuevo.id())) cout << "imposible insertar, placa duplicada" << endl;
-            else if(size == 97) cout << "tabla llena, imposible insertar" << endl;
+        void ins(Red nuevo) {
+            if(is_in(nuevo.id())){
+                // aumenta cosas
+            }
+            else if(size == 65521) cout << "tabla llena, imposible insertar" << endl;
             else {
                 int p = hash(nuevo.id());
                 // Buscar espacio
@@ -39,7 +41,7 @@ class Hash {
             }
         }
         // Buscar – sin colision O(1) || WCS O(n)
-        Car* search(string key) {
+        Red* search(string key) {
             for(int i = 0; i < 97; ++i) {
                 int p = (hash(key) + i) % 97;
                 if(!flag[p]) return nullptr;
@@ -49,7 +51,7 @@ class Hash {
         }
         // Imprimir – O(n)
         void print() {
-            for(int i = 0; i < 97; i++){
+            for(int i = 0; i < SIZE; i++){
                 cout << i;
                 if(flag[i] == 1) cout << ' ' << tabla[i];
                 cout << endl;
@@ -57,7 +59,7 @@ class Hash {
         }
         // Elemento en el set – sin colision O(1) || WCS O(n)
         bool is_in(string key){
-            for(int i = 0; i < 97; ++i) {
+            for(int i = 0; i < SIZE; ++i) {
                 int p = (hash(key) + i) % 97;
                 if(!flag[p]) return false;
                 if(flag[p] == 1 && tabla[p].id() == key) return true;
@@ -67,8 +69,8 @@ class Hash {
 
     private:
         static const int SIZE{65521};
-        Car coche;
-        Car tabla[SIZE] = {coche};
+        Red red;
+        Red tabla[SIZE] = {red};
         int flag[SIZE] = {0};
         int size{0};
 

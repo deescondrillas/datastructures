@@ -1,4 +1,4 @@
-// Act 4.3 – 23 de noviembre, 2025
+// Act 5.2 – 29 de noviembre, 2025
 // Clase Log
 
 #pragma once
