@@ -51,7 +51,7 @@ public:
     }
 
     // push back
-    void pb(T& value){
+    void pb(const T& value){
         if (size == capacity) allocate();
         data[size++] = value;
     }

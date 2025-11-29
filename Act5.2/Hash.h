@@ -12,7 +12,7 @@ class Hash {
     public:
         // Constructor – O(1)
         Hash() {
-
+            tabla = Vector<Red>(SIZE);
         }
         // Insertar – sin colision O(1) || WCS O(n)
         void ins(int ip1, int ip2, string& ip) {
@@ -53,7 +53,7 @@ class Hash {
     private:
         static const int SIZE{65521};
         Red red;
-        Red tabla[SIZE] = {red};
+        Vector<Red> tabla;
         int flag[SIZE] = {0};
         int size{0};
 
