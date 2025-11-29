@@ -35,7 +35,7 @@ class Red {
 
         // Parsea la Red a string
         string getRed(){
-            return to_string(ip1) + "-" + to_string(ip2);
+            return to_string(ip1) + "-" + to_string (ip2);
         }
 
         // Ordena las IPs;

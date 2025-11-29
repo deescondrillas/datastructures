@@ -24,7 +24,7 @@ int main() {
     while (getline(fin, line)) {
         entry.read(line);
 
-        auto red = entry.getRed();
+        pair<int, int> red = entry.getRed();
         string ip = entry.getIP();
         hash.ins(red.first, red.second, ip);
     }

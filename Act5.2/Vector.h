@@ -42,7 +42,7 @@ public:
         }
         return *this;
     }
-
+    // ReSize del vector
     void resize(int newSize){
         if (newSize > capacity) {
             grow(newSize);
