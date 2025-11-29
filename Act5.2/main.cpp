@@ -20,8 +20,6 @@ int main() {
     Hash hash;
     Log entry;
 
-    if (!fin) cout << "NO SE ABRIO BITACORA\n";
-
     // Leer archivo de bitacora
     while (getline(fin, line)) {
         entry.read(line);
