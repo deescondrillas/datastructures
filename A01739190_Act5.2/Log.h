@@ -4,7 +4,7 @@
 #pragma once
 
 #include <sstream>
-#include <string>
+#include "Red.h"
 
 using namespace std;
 
@@ -17,13 +17,6 @@ class Log {
         // Constructor                  | O(1)
         Log() {
 
-        }
-        // Constructor con parametros   | O(1)
-        Log(int t[5], int d[4], int p, string s) {
-            for(int i = 0; i < 5; ++i) this->timestamp[i] = t[i];
-            for(int i = 0; i < 4; ++i) this->ip[i] = d[i];
-            this->issue = s;
-            this->port = p;
         }
 
         // Guardar linea en log         | O(1)
@@ -44,11 +37,14 @@ class Log {
             getline(lin, hora, ' ');
             timestamp[4] = stoi(hora);
             // Guardar IP
+            int ip[4];
             for(int i = 0; i < 4; ++i) {
                 if(i < 3) getline(lin, ips, '.');
                 else getline(lin, ips, ':');
                 ip[i] = stoi(ips);
             }
+            redIP.init(ip[0], ip[1]);
+            hostIP.init(ip[2], ip[3]);
             // Guardar puerto
             getline(lin, puerto, ' ');
             port = stoi(puerto);
@@ -57,23 +53,15 @@ class Log {
             issue = mensaje;
         }
 
-        // Crear red                    | O(1)
-        pair<int, int> getRed() {
-            return {ip[0], ip[1]};
-        }
-
-        // Retorna la Ip como string
-        string getIP() {
-            return to_string(ip[0]) + "." +
-                    to_string(ip[1]) + "." +
-                    to_string(ip[2]) + "." +
-                    to_string(ip[3]);
+        // Retorna la red del log       | O(1)
+        Red getRed() {
+            return Red(redIP, hostIP);
         }
 
     private:
         // Variables de almacenamiento
         int timestamp[5] = {0, 0, 0, 0, 0};     // 1. mes, día, hora, minuto, segundo
-        int ip[4] = {0, 0, 0, 0};               // 2. primera, segunda, tercera, cuarta address
+        Ip redIP, hostIP;                       // 2. primera, segunda, tercera, cuarta address
         int port = 0;                           // 3. puerto
         string issue = "";                      // 4. descripción de error
 };

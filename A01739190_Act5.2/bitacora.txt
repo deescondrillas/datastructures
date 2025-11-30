@@ -150,8 +150,6 @@ Jul 20 07:47:10 46.194.111.212:7816 Failed password for illegal user guest
 Jun 25 08:53:45 253.60.198.69:6124 Login timeout
 Jun 19 14:58:28 4.43.154.99:8770 Login timeout
 Mar 11 03:48:44 9.66.32.36:9988 Illegal user
-Mar 11 03:48:45 9.66.32.36:9989 Illegal user
-Mar 11 03:48:44 9.66.32.36:9987 Illegal user
 Aug 05 17:01:32 181.77.205.38:2961 Login timeout
 Mar 17 03:46:34 105.104.49.223:7672 Failed password for illegal user guest
 Feb 02 02:49:31 104.121.58.219:7365 Login timeout
@@ -22076,7 +22074,6 @@ Jan 24 21:16:45 133.83.249.98:1013 Failed password for root
 Jan 20 06:02:17 62.89.19.77:5319 Failed password for illegal user guest
 Mar 14 05:13:12 171.86.32.254:8090 Failed password for root
 Jan 21 16:33:20 181.77.47.98:2353 Illegal user
-Jan 21 16:33:20 181.77.47.98:2354 Illegal user
 May 22 09:53:11 46.49.243.182:2060 Illegal user
 Oct 11 15:30:46 116.234.12.169:3068 Too many login attempts
 May 01 19:12:55 198.121.123.61:9718 No response from server

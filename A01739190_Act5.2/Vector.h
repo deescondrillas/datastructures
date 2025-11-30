@@ -7,15 +7,17 @@ template <class T>
 class Vector {
 public:
     // Constructor
-    Vector() : data(nullptr), size(0), capacity(0) {}
+    Vector() : data(nullptr), size(0), capacity(0) {
+
+    }
     // Constructor con tamaño
-    Vector(int size_){
+    Vector(int size_) {
         size = size_;
         capacity = size_;
         data = new T[size];
     };
     // Copiar
-    Vector(const Vector& other){
+    Vector(const Vector& other) {
         size = other.size;
         capacity = other.capacity;
         data = new T[capacity];
@@ -24,11 +26,11 @@ public:
         }
     }
     // Destructor
-    ~Vector(){
+    ~Vector() {
         delete[] data;
     }
     // Para copiar
-    Vector& operator=(const Vector& other){
+    Vector& operator = (const Vector& other){
         if (this != &other) {
             delete[] data;
 
@@ -43,7 +45,7 @@ public:
         return *this;
     }
     // ReSize del vector
-    void resize(int newSize){
+    void resize(int newSize) {
         if (newSize > capacity) {
             grow(newSize);
         }
@@ -51,7 +53,7 @@ public:
     }
 
     // push back
-    void pb(const T& value){
+    void pb(const T& value) {
         if (size == capacity) allocate();
         data[size++] = value;
     }
@@ -62,16 +64,16 @@ public:
     }
 
     // Retorna tamaño
-    int Size() {
+    int sz() {
         return size;
     }
 
     // Operador []
-    T& operator[](int index){
+    T& operator [] (int index) {
         return data[index];
     }
 
-    const T& operator[](int index) const{
+    const T& operator [] (int index) const {
         return data[index];
     }
 

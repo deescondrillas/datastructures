@@ -4,64 +4,41 @@
 // A01739522 – Sergio Sebastian Cortez Yepez
 // A01739190 – Carlos Arturo Ferat Torres
 
-#include <iostream>
 #include <fstream>
 #include "Hash.h"
 #include "Log.h"
 
 using namespace std;
 
-// Declarar archivo de bitacora
-
 int main() {
     // Variables
-    ifstream fin("bitacora.txt");
+    ifstream fin("bitacorx.txt");
+    Vector<Log> logs;
     string line;
     Hash hash;
-    Log entry;
-    // Leer archivo de bitacora
-    while (getline(fin, line)) {
-        entry.read(line);
-        
-        pair<int, int> red = entry.getRed();
-        string ip = entry.getIP();
-        hash.ins(red.first, red.second, ip);
+    Red te;
+
+    // Lectura de archivo           | O(n)
+    while(getline(fin, line)) {
+        Log reader;
+        reader.read(line);
+        hash.ins(reader.getRed());
     }
-    hash.OrdenarIPs();
-    cout << "completado" << endl;
-    
-    // --------------------------------------------------
-    // Leer que redes imprimir
-    int n;
-    string redStr;
-    cin>>n;
 
-    for (int i=0; i<n; i++) {
-        cin>>redStr;
-        cout << "----- " << redStr << " -----\n";
+    // Mergesort                    | O(n log₂n)
+    hash.mergesort();
 
-        int pos = redStr.find('.');
-        int ip1 = stoi(redStr.substr(0, pos));
-        int ip2 = stoi(redStr.substr(pos+1));
+    // Variables para queries
+    Red query;
+    int n{0};
+    cin >> n;
 
-        Red* net = hash.search(ip1, ip2);
-
-        if (!net) {
-            cout << "Red no encontrada.\n\n";
-            continue;
-        }
-
-        cout << "Accesos totales: " << net->getAccs() << "\n";
-        cout << "IPs unicas: " << net->getNumIPs() << "\n";
-
-        Vector<string> v = net->getIPs();   // obtienes el vector
-        for (int i = 0; i < v.Size(); i++) {
-            cout << v[i] << "\n";
-        }
-
-        cout << "\n";
+    // Manejo de queries            | O(q)
+    for(int i = 0; i < n; ++i) {
+        cin >> query;
+        Red* data = hash.search(query);
+        data ? cout << *data << endl : cout << "Dato no encontrado" << endl;
     }
 
     return 0;
-
 }

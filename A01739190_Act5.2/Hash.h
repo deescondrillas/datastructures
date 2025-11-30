@@ -2,71 +2,64 @@
 // class Hash
 
 #pragma once
-# include "Red.h"
-# include "Vector.h"
-# include <iostream>
+
+#include "Red.h"
 
 using namespace std;
 
 class Hash {
     public:
-        // Constructor – O(1)
+        // Constructor      | O(1)
         Hash() {
             tabla = Vector<Red>(SIZE);
         }
-        // Insertar – sin colision O(1) || WCS O(n)
-        void ins(int ip1, int ip2, string& ip) {
-            if(size == 65521) {
-                cout << "tabla llena, imposible insertar" << endl;
-                return;
-            };
 
-            int p = hash(ip1, ip2);
-
-            // Buscar espacio
-            while(flag[p] && !(tabla[p].ip1 == ip1 && tabla[p].ip2 == ip2))
-                p = (p + 1) % SIZE;
-
-            // Revisa si es nuevo
-            if (!flag[p]){
-                tabla[p] = Red(ip1, ip2);
+        // Insertar         | sin colision O(1) || WCS O(n)
+        void ins(Red red) {
+            // Crear copia a insertar
+            Red nuevo = red;
+            // Elemento ya insertado
+            Red* find = search(nuevo);
+            if(find) find->insertIP(*nuevo.hostIP());
+            // Tabla llena
+            else if(size == 65521) cout << "tabla llena, imposible insertar" << endl;
+            // Insertar nuevo
+            else {
+                // Buscar espacio
+                int p = hash(*nuevo.redIP());
+                while(flag[p]) p = (p + 1) % SIZE;
+                tabla[p] = nuevo;
                 flag[p] = 1;
                 size++;
             }
-
-            // Añade IP completa
-            tabla[p].insertIP(ip);
         }
 
-        // Buscar – sin colision O(1) || WCS O(n)
-        Red* search(int ip1, int ip2) {
-            int p = hash(ip1, ip2);
-
-            while(flag[p]){
-                if(tabla[p].ip1 == ip1 && tabla[p].ip2 == ip2)
-                    return &tabla[p];
+        // Buscar           | sin colision O(1) || WCS O(n)
+        Red* search(Red &red) {
+            int p = hash(*red.redIP());
+            // Buscar ip de red
+            while(flag[p]) {
+                if(tabla[p] == red) return &tabla[p];
                 p = (p + 1) % SIZE;
             }
             return nullptr;
         }
 
-        void OrdenarIPs(){
-            for(int i=0; i<SIZE; i++){
-                if(flag[i]) 
-                    tabla[i].mergeSortIPs( 0, tabla[i].getNumIPs() - 1 );       
-            }
+        // Mergesort        | O(n log₂n)
+        void mergesort() {
+            for(int i = 0; i < SIZE; ++i) if(flag[i]) tabla[i].mergeSortIPs(0, tabla[i].hostSZ() - 1);
         }
 
     private:
         static const int SIZE{65521};
         Red red;
         Vector<Red> tabla;
-        int flag[SIZE] = {0};
+        bool flag[SIZE] = {false};
         int size{0};
 
-        // Funcion Hash – O(1)
-        int hash(int ip1, int ip2) {
-            return (ip1 * 256 + ip2) % SIZE;
+        // Funcion Hash     | O(1)
+        int hash(Ip red) {
+            return (red.first() * 256 + red.second()) % SIZE;
         }
         // Se usa la funcion Ip1 * 256 + Ip2 ya que la red esta formada por dos secciones a y b de hasta 256
         // Todas las combinaciónes posibles se encuentran entre [0, 65536] por lo que representando la llave
