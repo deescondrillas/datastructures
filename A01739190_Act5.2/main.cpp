@@ -19,24 +19,25 @@ int main() {
     string line;
     Hash hash;
     Log entry;
-
     // Leer archivo de bitacora
     while (getline(fin, line)) {
         entry.read(line);
-
+        
         pair<int, int> red = entry.getRed();
         string ip = entry.getIP();
         hash.ins(red.first, red.second, ip);
     }
     hash.OrdenarIPs();
     cout << "completado" << endl;
-
+    
     // --------------------------------------------------
-    // codigo de un amigo para probar
-    string consultas[] = {"181.77", "9.66", "4.41"};
+    // Leer que redes imprimir
+    int n;
+    string redStr;
+    cin>>n;
 
-    for (string redStr : consultas) {
-
+    for (int i=0; i<n; i++) {
+        cin>>redStr;
         cout << "----- " << redStr << " -----\n";
 
         int pos = redStr.find('.');
