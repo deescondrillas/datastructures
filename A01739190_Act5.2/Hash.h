@@ -65,5 +65,5 @@ class Hash {
         // Todas las combinaciónes posibles se encuentran entre [0, 65536] por lo que representando la llave
         // en un entero de 16 bits se manejan todas esas posibilidades, posteriormente se le aplica modulo
         // 65521, el primo más grande menor a 65536, lo que garantiza muy pocas colisiones y aproveca todo el
-        // tamaño de los primeros dos octetos de la IP.Mome
+        // tamaño de los primeros dos octetos de la IP.Home
 };

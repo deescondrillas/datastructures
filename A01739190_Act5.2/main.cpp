@@ -13,10 +13,8 @@ using namespace std;
 int main() {
     // Variables
     ifstream fin("bitacorx.txt");
-    Vector<Log> logs;
     string line;
     Hash hash;
-    Red te;
 
     // Lectura de archivo           | O(n)
     while(getline(fin, line)) {
