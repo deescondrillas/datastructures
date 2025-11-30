@@ -54,11 +54,13 @@ class Red {
             mergeSortIPs(left, mid);
             mergeSortIPs(mid + 1, right);
             // Union
-            merge(left, mid, right);
+            int removed = merge(left, mid, right);
+            while(removed--) hosts.pop_back();
         }
 
         // Unir eliminando duplicados       | O(n)
-        void merge(int left, int mid, int right){
+        int merge(int left, int mid, int right){
+            int removed {0};
             // Tamagnos de cada vector
             int n1 = mid - left + 1;
             int n2 = right - mid;
@@ -71,7 +73,7 @@ class Red {
             while(i < n1 && j < n2) {
                 if(L[i] == R[j]) {
                     hosts[k++] = L[i++];
-                    j++;
+                    j++; removed++;
                 }
                 else if (L[i] < R[j]) hosts[k++] = L[i++];
                 else hosts[k++] = R[j++];
@@ -79,6 +81,7 @@ class Red {
             // Insertar remanentes
             while(i < n1) hosts[k++] = L[i++];
             while(j < n2) hosts[k++] = R[j++];
+            return removed;
         }
 
         // Leer                             | O(1)
