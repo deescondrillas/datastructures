@@ -28,7 +28,7 @@ int main() {
         string ip = entry.getIP();
         hash.ins(red.first, red.second, ip);
     }
-
+    hash.OrdenarIPs();
     cout << "completado" << endl;
 
     // --------------------------------------------------

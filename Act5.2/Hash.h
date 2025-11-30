@@ -50,6 +50,13 @@ class Hash {
             return nullptr;
         }
 
+        void OrdenarIPs(){
+            for(int i=0; i<SIZE; i++){
+                if(flag[i]) 
+                    tabla[i].mergeSortIPs( 0, tabla[i].getNumIPs() - 1 );       
+            }
+        }
+
     private:
         static const int SIZE{65521};
         Red red;
