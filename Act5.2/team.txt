@@ -1,0 +1,30 @@
+Act 5.2 – Actividad Integral de Grafos
+29 de Noviembre, 2025
+
+A01739410 – Franco De Escondrillas Vazquez {
+    Estructuras de almacenamiento con sobrecarga de operadores.
+      • Log.h
+      • Ip.h
+    Manejo de queries
+
+}
+
+A01739522 – Sergio Sebastian Cortez Yepez {
+    Estructura de datos combinados
+      • Red.h
+    Algoritmo de ordenamiento y fusión de datos de red repetidos
+      • mergesort()
+}
+
+A01739190 – Carlos Arturo Ferat Torres {
+    Estructura de la tabla y algoritmo de hash
+      • Hash.h
+    Arreglo de datos dinamico para la tabla hash
+      • Vector.h
+
+}
+
+En conjunto {
+    Programa principal
+     • main.cpp
+}
